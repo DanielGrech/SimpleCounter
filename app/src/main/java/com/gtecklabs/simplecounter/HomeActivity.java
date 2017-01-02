@@ -2,7 +2,6 @@ package com.gtecklabs.simplecounter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.MenuItem;
 import butterknife.BindView;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;

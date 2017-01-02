@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.support.annotation.VisibleForTesting;
 import butterknife.ButterKnife;
-import com.facebook.stetho.Stetho;
 import com.gtecklabs.simplecounter.di.AndroidModule;
 import com.gtecklabs.simplecounter.di.DaggerDiComponent;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -38,6 +37,8 @@ public class ScApp extends Application {
     Timber.plant(new Timber.DebugTree());
     ButterKnife.setDebug(true);
 
+    StethoUtil.initialize(this);
+
     StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
         .detectAll()
         .penaltyLog()
@@ -48,8 +49,6 @@ public class ScApp extends Application {
         .penaltyLog()
         .penaltyDeath()
         .build());
-
-    StethoUtil.initialize(this);
   }
 
   public static DiComponent getDi(Context context) {
