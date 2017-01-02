@@ -1,0 +1,121 @@
+apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    signingConfigs {
+        release {
+            if (config.releaseSigning.storePassword != null) {
+                storeFile file(config.releaseSigning.storeFile)
+                storePassword config.releaseSigning.storePassword
+                keyAlias config.releaseSigning.alias
+                keyPassword config.releaseSigning.aliasPassword
+            }
+        }
+    }
+
+    defaultConfig {
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            resValue "string", "app_name", "${config.appName} Debug"
+
+            manifestPlaceholders = [
+                    "useLargeHeap": "false"
+            ]
+        }
+
+        release {
+            minifyEnabled false
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            resValue "string", "app_name", "${config.appName}"
+
+            manifestPlaceholders = [
+                    "useLargeHeap": "false"
+            ]
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+        }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'LICENSE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'NOTICE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    configurations.all {
+        resolutionStrategy.force "com.android.support:support-annotations:${versions.androidSupport}"
+    }
+}
+
+dependencies {
+    annotationProcessor "com.google.auto.value:auto-value:${versions.autoValue}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+
+    compile fileTree(dir: 'libs', include: '*.jar')
+
+    compile "com.android.support:appcompat-v7:${versions.androidSupport}"
+    compile "com.android.support:design:${versions.androidSupport}"
+    compile "com.android.support:support-v4:${versions.androidSupport}"
+    compile "com.android.support:recyclerview-v7:${versions.androidSupport}"
+    compile "com.facebook.rebound:rebound:${versions.rebound}"
+    compile "com.google.dagger:dagger:${versions.dagger}"
+    compile "com.jakewharton.timber:timber:${versions.timber}"
+    compile "com.jakewharton:butterknife:${versions.butterknife}"
+    compile "javax.annotation:jsr250-api:${versions.jsr250}"
+
+    compile "com.jakewharton.rxbinding:rxbinding:${versions.rxBinding}"
+    compile "com.jakewharton.rxbinding:rxbinding-support-v4:${versions.rxBinding}"
+    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${versions.rxBinding}"
+    compile "com.trello:rxlifecycle:${versions.rxLifecycle}"
+    compile "com.trello:rxlifecycle-android:${versions.rxLifecycle}"
+    compile "io.reactivex:rxandroid:${versions.rxAndroid}"
+
+    debugCompile "com.facebook.stetho:stetho:${versions.stetho}"
+
+    provided "com.google.auto.value:auto-value:${versions.autoValue}"
+
+    testCompile "junit:junit:${versions.junit}"
+    testCompile "org.assertj:assertj-core:${versions.assertJ}"
+    testCompile "org.mockito:mockito-core:${versions.mockito}"
+    testCompile "org.robolectric:robolectric:${versions.robolectric}"
+    testCompile "org.robolectric:shadows-support-v4:${versions.robolectric}"
+}
+
+// Display more verbose information when running tests from CLI
+tasks.withType(Test).whenTaskAdded { testTask ->
+    testTask.maxParallelForks 4
+    testTask.testLogging config.testOptions
+}

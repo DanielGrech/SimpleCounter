@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <ImageView
+      android:id="@+id/profile"
+      android:src="@drawable/ic_action_me"
+      android:layout_marginStart="@dimen/padding_small"
+      android:layout_marginEnd="@dimen/padding_small"
+      style="@style/TouchTarget"/>
+
+  <TextView
+      android:id="@+id/title"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:layout_width="0dp"
+      android:gravity="center"
+      android:textColor="@color/accent"
+      android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+  <ImageView
+      android:id="@+id/settings"
+      android:src="@drawable/ic_action_settings"
+      android:layout_marginStart="@dimen/padding_small"
+      android:layout_marginEnd="@dimen/padding_small"
+      style="@style/TouchTarget"/>
+
+</merge>
