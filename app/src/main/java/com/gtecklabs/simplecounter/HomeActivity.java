@@ -43,4 +43,8 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
       super.onBackPressed();
     }
   }
+
+  public void setToolbarTitle(String title) {
+    mToolbar.setText(title);
+  }
 }

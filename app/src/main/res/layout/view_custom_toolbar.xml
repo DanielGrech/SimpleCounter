@@ -2,9 +2,7 @@
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <ImageView
-      android:id="@+id/profile"
-      android:src="@drawable/ic_action_me"
+  <android.support.v4.widget.Space
       android:layout_marginStart="@dimen/padding_small"
       android:layout_marginEnd="@dimen/padding_small"
       style="@style/TouchTarget"/>
@@ -15,7 +13,7 @@
       android:layout_height="wrap_content"
       android:layout_width="0dp"
       android:gravity="center"
-      android:textColor="@color/accent"
+      android:textColor="@color/cta_color"
       android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
   <ImageView

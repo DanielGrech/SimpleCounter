@@ -3,7 +3,7 @@
     <item name="android:layout_width">@dimen/standard_touch_target_size</item>
     <item name="android:layout_height">@dimen/standard_touch_target_size</item>
     <item name="android:padding">@dimen/padding_small</item>
-    <item name="android:tint">@color/accent</item>
+    <item name="android:tint">@color/cta_color</item>
     <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
   </style>
 </resources>

@@ -18,8 +18,6 @@ public class CustomToolbarView extends LinearLayout {
 
   public interface Listener {
 
-    void onProfileClicked(View profileButton);
-
     void onSettingsClicked(View settingsButton);
   }
 
@@ -54,13 +52,6 @@ public class CustomToolbarView extends LinearLayout {
 
   public void setListener(@Nullable Listener listener) {
     mListener = listener;
-  }
-
-  @OnClick(R.id.profile)
-  void onProfileClicked() {
-    if (mListener != null) {
-      mListener.onProfileClicked(this);
-    }
   }
 
   @OnClick(R.id.settings)

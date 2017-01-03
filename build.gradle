@@ -61,6 +61,7 @@ subprojects {
                 rxAndroid     : "1.2.1",
                 rxBinding     : "0.4.0",
                 rxLifecycle   : "0.8.0",
+                sqlbrite      : "1.1.1",
                 stetho        : "1.4.1",
                 timber        : "4.3.1",
 
