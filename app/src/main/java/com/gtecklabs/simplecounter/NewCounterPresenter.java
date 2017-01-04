@@ -12,4 +12,14 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
   protected void inject(DiComponent component) {
     component.inject(this);
   }
+
+  void onDoneClicked() {
+    // TODO: Save data and navigate home
+  }
+
+  @Override
+  public boolean onBackPressed() {
+    // TODO: Only allow going back if no changes made..
+    return super.onBackPressed();
+  }
 }

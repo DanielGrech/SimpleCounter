@@ -3,6 +3,7 @@ package com.gtecklabs.simplecounter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import butterknife.BindView;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -31,6 +32,18 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mToolbar.inflateMenu(R.menu.act_new_counter);
+    mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+      @Override
+      public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.done) {
+          getPresenter().onDoneClicked();
+          return true;
+        }
+
+        return false;
+      }
+    });
     mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
