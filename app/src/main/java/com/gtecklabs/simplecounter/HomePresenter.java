@@ -21,7 +21,7 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
     getActivity().setToolbarTitle(getActivity().getString(R.string.app_name));
   }
 
-  public boolean onBackPressed() {
-    return false;
+  void onFabClicked() {
+    getNavigator().goToNewCounterScreen();
   }
 }

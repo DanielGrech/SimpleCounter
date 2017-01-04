@@ -3,6 +3,7 @@ package com.gtecklabs.simplecounter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import butterknife.BindView;
+import butterknife.OnClick;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
 import com.gtecklabs.simplecounter.view.CustomToolbarView;
@@ -44,7 +45,12 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
     }
   }
 
-  public void setToolbarTitle(String title) {
+  @OnClick(R.id.fab)
+  void onFabClicked() {
+    getPresenter().onFabClicked();
+  }
+
+  void setToolbarTitle(String title) {
     mToolbar.setText(title);
   }
 }

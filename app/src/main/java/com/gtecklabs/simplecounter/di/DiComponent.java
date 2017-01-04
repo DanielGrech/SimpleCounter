@@ -18,6 +18,8 @@ import javax.inject.Singleton;
 public interface DiComponent {
 
   void inject(HomeActivity activity);
-
   void inject(HomePresenter presenter);
+
+  void inject(NewCounterPresenter presenter);
+  void inject(NewCounterActivity activity);
 }

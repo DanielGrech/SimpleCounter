@@ -3,6 +3,7 @@ package com.gtecklabs.simplecounter.foundation;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import com.gtecklabs.simplecounter.Navigator;
 import com.gtecklabs.simplecounter.ScApp;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.util.Preconditions;
@@ -18,6 +19,7 @@ import static com.trello.rxlifecycle.android.ActivityEvent.*;
 public abstract class BaseActivityPresenter<T extends Activity> {
 
   private final T mActivity;
+  private final Navigator mNavigator;
   private final BehaviorSubject<ActivityEvent> mLifecycleObservable;
 
   protected abstract void inject(DiComponent component);
@@ -25,6 +27,8 @@ public abstract class BaseActivityPresenter<T extends Activity> {
   public BaseActivityPresenter(T activity) {
     mActivity = Preconditions.checkNotNull(activity);
     mLifecycleObservable = BehaviorSubject.create();
+
+    mNavigator = new Navigator(mActivity);
   }
 
   public void onCreate(@Nullable  Bundle bundle) {
@@ -54,8 +58,16 @@ public abstract class BaseActivityPresenter<T extends Activity> {
     mLifecycleObservable.onNext(STOP);
   }
 
+  public boolean onBackPressed() {
+    return false;
+  }
+
   protected T getActivity() {
     return mActivity;
+  }
+
+  protected Navigator getNavigator() {
+    return mNavigator;
   }
 
   <S> Subscription subscribe(Observable<S> observable, BaseSubscriber<S> subscriber) {
