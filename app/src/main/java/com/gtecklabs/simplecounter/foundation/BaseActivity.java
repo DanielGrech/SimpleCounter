@@ -70,6 +70,13 @@ public abstract class BaseActivity<A extends BaseActivity, P extends BaseActivit
   }
 
   @Override
+  public void onBackPressed() {
+    if (!getPresenter().onBackPressed()) {
+      super.onBackPressed();
+    }
+  }
+
+  @Override
   public final P getPresenter() {
     return mPresenter;
   }

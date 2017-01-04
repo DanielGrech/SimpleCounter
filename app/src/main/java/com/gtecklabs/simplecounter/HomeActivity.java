@@ -38,13 +38,6 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
     super.onResume();
   }
 
-  @Override
-  public void onBackPressed() {
-    if (!getPresenter().onBackPressed()) {
-      super.onBackPressed();
-    }
-  }
-
   @OnClick(R.id.fab)
   void onFabClicked() {
     getPresenter().onFabClicked();
