@@ -3,4 +3,5 @@
   <string name="new_counter_save_action">Done</string>
   <string name="new_counter_input_name_hint">Counter name (Eg \"Miles ran\", \"Hotdogs eaten\")</string>
   <string name="new_counter_screen_title">Create new</string>
+  <string name="settings">Settings</string>
 </resources>
