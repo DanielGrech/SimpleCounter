@@ -1,6 +1,7 @@
 package com.gtecklabs.simplecounter;
 
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -64,5 +65,25 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
         onBackPressed();
       }
     });
+  }
+
+  @Nullable
+  public String getTitleFromUserInput() {
+    return mNameInput.getText() == null ? null : mNameInput.getText().toString();
+  }
+
+  @Nullable
+  public String getDescriptionFromUserInput() {
+    return mDescriptionInput.getText() == null ? null : mDescriptionInput.getText().toString();
+  }
+
+  @ColorInt
+  public int getColorFromUserInput() {
+    // TODO: Get user selected color
+    return 0;
+  }
+
+  public void showErrorForMissingName(String errorMessage) {
+    mNameInput.setError(errorMessage);
   }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import com.gtecklabs.simplecounter.Navigator;
 import com.gtecklabs.simplecounter.ScApp;
+import com.gtecklabs.simplecounter.di.ActivityModule;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.util.Preconditions;
 import com.gtecklabs.simplecounter.util.RxUtils;
