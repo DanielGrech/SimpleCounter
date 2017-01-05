@@ -4,7 +4,8 @@
   <dimen name="padding_small">8dp</dimen>
   <dimen name="default_elevation">8dp</dimen>
   <dimen name="standard_touch_target_size">48dp</dimen>
+  <dimen name="text_label_padding">4dp</dimen>
 
   <dimen name="new_counter_horizontal_padding">30dp</dimen>
-  <dimen name="text_label_padding">4dp</dimen>
+  <dimen name="new_counter_color_picker_height">100dp</dimen>
 </resources>
