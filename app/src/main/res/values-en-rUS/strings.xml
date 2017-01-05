@@ -1,0 +1,4 @@
+<resources>
+  <string name="new_counter_input_color_title">Color</string>
+  <string name="new_counter_input_color_description">Color to associate with the counter.</string>
+</resources>
