@@ -7,6 +7,10 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class Count {
 
+  public static final long NO_ID = -1;
+
+//  public abstract long id();
+
   public abstract String title();
 
   public abstract @Nullable String description();
@@ -14,6 +18,7 @@ public abstract class Count {
   public abstract float value();
 
   public static Builder builder() {
+//    return new AutoValue_Count.Builder().id(NO_ID);
     return new AutoValue_Count.Builder();
   }
 
@@ -35,6 +40,8 @@ public abstract class Count {
 
   @AutoValue.Builder
   public static abstract class Builder {
+
+//    public abstract Builder id(long id);
 
     public abstract Builder title(String title);
 

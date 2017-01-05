@@ -70,7 +70,7 @@ public abstract class BaseActivityPresenter<T extends Activity> {
     return mNavigator;
   }
 
-  <S> Subscription subscribe(Observable<S> observable, BaseSubscriber<S> subscriber) {
+  protected <S> Subscription subscribe(Observable<S> observable, BaseSubscriber<S> subscriber) {
     return observable.compose(RxLifecycleAndroid.<S>bindActivity(mLifecycleObservable))
         .compose(RxUtils.<S>executeOnIoThread())
         .subscribe(subscriber);

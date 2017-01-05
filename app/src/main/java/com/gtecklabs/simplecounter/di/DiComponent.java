@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 @Singleton
 @Component(modules = {
     AndroidModule.class,
+    DataModule.class,
 })
 public interface DiComponent {
 
