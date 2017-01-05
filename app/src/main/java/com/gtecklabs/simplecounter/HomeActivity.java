@@ -2,17 +2,27 @@ package com.gtecklabs.simplecounter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
+import com.gtecklabs.simplecounter.model.Count;
+
+import java.util.List;
 
 public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
+
+  @BindView(R.id.count_list)
+  RecyclerView mCountRecyclerView;
+
+  private CountListAdapter mAdapter;
 
   @Override
   protected int getLayoutResId() {
@@ -33,6 +43,7 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setupToolbar();
+    setupRecyclerView();
   }
 
   @Override
@@ -43,6 +54,10 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   @OnClick(R.id.fab)
   void onFabClicked() {
     getPresenter().onFabClicked();
+  }
+
+  void bind(List<Count> counts) {
+    mAdapter.bind(counts);
   }
 
   private void setupToolbar() {
@@ -59,5 +74,12 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
         return false;
       }
     });
+  }
+
+  private void setupRecyclerView() {
+    mAdapter = new CountListAdapter();
+
+    mCountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    mCountRecyclerView.setAdapter(mAdapter);
   }
 }
