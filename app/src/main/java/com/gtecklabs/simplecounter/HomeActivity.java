@@ -31,6 +31,7 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mToolbar.setText(R.string.app_name);
   }
 
   @Override
@@ -41,9 +42,5 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   @OnClick(R.id.fab)
   void onFabClicked() {
     getPresenter().onFabClicked();
-  }
-
-  void setToolbarTitle(String title) {
-    mToolbar.setText(title);
   }
 }

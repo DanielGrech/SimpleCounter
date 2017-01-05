@@ -6,4 +6,5 @@
   <dimen name="standard_touch_target_size">48dp</dimen>
 
   <dimen name="toolbar_height">56dp</dimen>
+  <dimen name="new_counter_horizontal_padding">30dp</dimen>
 </resources>

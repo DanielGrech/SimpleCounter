@@ -18,7 +18,6 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
   @Override
   public void onCreate(@Nullable Bundle bundle) {
     super.onCreate(bundle);
-    getActivity().setToolbarTitle(getActivity().getString(R.string.app_name));
   }
 
   void onFabClicked() {
