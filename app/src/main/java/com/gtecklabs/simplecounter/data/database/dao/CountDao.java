@@ -2,6 +2,7 @@ package com.gtecklabs.simplecounter.data.database.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.graphics.Color;
 import com.gtecklabs.simplecounter.data.database.ContentValuesBuilder;
 import com.gtecklabs.simplecounter.data.database.CursorColumnMap;
 import com.gtecklabs.simplecounter.data.database.DbOpenHelper.Field;
@@ -14,9 +15,10 @@ public class CountDao implements Dao<Count> {
     final CursorColumnMap cc = new CursorColumnMap(cursor);
 
     return Count.builder()
-//        .id(cc.getLong(Field.ID, 0))
+        .id(cc.getLong(Field.ID, 0))
         .title(cc.getString(Field.TITLE))
         .description(cc.getString(Field.DESCRIPTION))
+        .color(cc.getInt(Field.COLOR, Color.BLACK))
         .value(cc.getFloat(Field.VALUE, 0f))
         .build();
   }
@@ -24,9 +26,10 @@ public class CountDao implements Dao<Count> {
   @Override
   public ContentValues convert(Count count) {
     return new ContentValuesBuilder()
-//        .putIfPositive(Field.ID, count.id())
+        .putIfPositive(Field.ID, count.id())
         .put(Field.TITLE, count.title())
         .put(Field.DESCRIPTION, count.description())
+        .put(Field.COLOR, count.color())
         .put(Field.VALUE, count.value())
         .build();
   }

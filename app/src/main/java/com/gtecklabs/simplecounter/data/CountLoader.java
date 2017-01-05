@@ -30,7 +30,7 @@ public class CountLoader {
     // For DI only
   }
 
-  private final Func1<Cursor, Count> CURSOR_COUNT_MAPPING = new Func1<Cursor, Count>() {
+  private final Func1<Cursor, Count> mCursorCountMapping = new Func1<Cursor, Count>() {
     @Override
     public Count call(Cursor cursor) {
       return mDaoFactory.build(Count.class, cursor);
@@ -38,19 +38,18 @@ public class CountLoader {
   };
 
   public Observable<List<Count>> getAllCounts() {
-    final QueryObservable query = mDatabase.createQuery(COUNT_TABLE_NAME, null);
-    return query.mapToList(CURSOR_COUNT_MAPPING);
+    final QueryObservable query =
+        mDatabase.createQuery(COUNT_TABLE_NAME, "SELECT * FROM " + COUNT_TABLE_NAME);
+    return query.mapToList(mCursorCountMapping);
   }
 
   public Observable<Count> getCount(long id) {
     final QueryObservable query =
         mDatabase.createQuery(
             COUNT_TABLE_NAME,
-            "SELECT * FROM ? WHERE ? = ?",
-            COUNT_TABLE_NAME,
-            DbOpenHelper.Field.ID.getName(),
+            String.format("SELECT * FROM %s WHERE %s = ?", COUNT_TABLE_NAME, DbOpenHelper.Field.ID.getName()),
             String.valueOf(id));
-    return query.mapToOne(CURSOR_COUNT_MAPPING);
+    return query.mapToOne(mCursorCountMapping);
   }
 
   public Observable<Count> saveCount(final Count count) {
