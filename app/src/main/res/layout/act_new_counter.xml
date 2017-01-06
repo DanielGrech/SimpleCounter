@@ -54,7 +54,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/padding_default"
-          android:inputType="textAutoComplete"
+          android:inputType="textAutoComplete|textCapSentences"
           android:hint="@string/new_counter_input_name_hint"
           android:ellipsize="end"
           android:maxLines="1"/>
@@ -84,7 +84,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/padding_default"
-          android:inputType="textAutoComplete"
+          android:inputType="textAutoComplete|textCapSentences|textShortMessage"
           android:hint="@string/new_counter_input_description_hint"
           android:ellipsize="end"
           android:maxLines="1"/>
