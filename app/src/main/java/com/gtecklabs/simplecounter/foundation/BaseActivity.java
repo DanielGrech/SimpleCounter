@@ -35,6 +35,18 @@ public abstract class BaseActivity<A extends BaseActivity, P extends BaseActivit
   }
 
   @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mPresenter.onSaveInstanceState(outState);
+  }
+
+  @Override
+  protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    mPresenter.onRestoreInstanceState(savedInstanceState);
+  }
+
+  @Override
   protected void onStart() {
     super.onStart();
     mPresenter.onStart();

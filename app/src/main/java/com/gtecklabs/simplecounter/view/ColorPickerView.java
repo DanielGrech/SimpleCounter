@@ -62,6 +62,13 @@ public class ColorPickerView extends GridLayout {
     return Color.BLACK;
   }
 
+  public void setSelectedColor(@ColorInt int color) {
+    for (int i = 0, childCount = getChildCount(); i < childCount; i++) {
+      final ColorPickerItemView view = (ColorPickerItemView) getChildAt(i);
+      view.setSelected(view.getColor() == color);
+    }
+  }
+
   private void setupColors() {
     final int gridItemSize = getResources().getDimensionPixelSize(R.dimen.new_counter_color_picker_tile_size);
     final int gridMargins = getResources().getDimensionPixelOffset(R.dimen.padding_small);

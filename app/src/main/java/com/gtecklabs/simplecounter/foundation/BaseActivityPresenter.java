@@ -39,6 +39,14 @@ public abstract class BaseActivityPresenter<T extends Activity> {
     mLifecycleObservable.onNext(CREATE);
   }
 
+  public void onSaveInstanceState(Bundle outState) {
+    // No-op. Up to subclasses to implement
+  }
+
+  public void onRestoreInstanceState(Bundle state) {
+    // No-op. Up to subclasses to implement
+  }
+
   public void onStart() {
     mLifecycleObservable.onNext(START);
   }

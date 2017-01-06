@@ -72,21 +72,33 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
   }
 
   @Nullable
-  public String getTitleFromUserInput() {
+  String getNameFromUserInput() {
     return mNameInput.getText() == null ? null : mNameInput.getText().toString();
   }
 
   @Nullable
-  public String getDescriptionFromUserInput() {
+  String getDescriptionFromUserInput() {
     return mDescriptionInput.getText() == null ? null : mDescriptionInput.getText().toString();
   }
 
   @ColorInt
-  public int getColorFromUserInput() {
+  int getColorFromUserInput() {
     return mColorPicker.getSelectedColor();
   }
 
-  public void showErrorForMissingName(String errorMessage) {
+  void showErrorForMissingName(String errorMessage) {
     mNameInput.setError(errorMessage);
+  }
+
+  void setUserInputName(String name) {
+    mNameInput.setText(name);
+  }
+
+  void setUserInputDescription(String description) {
+    mDescriptionInput.setText(description);
+  }
+
+  void setUserInputColor(@ColorInt int color) {
+    mColorPicker.setSelectedColor(color);
   }
 }

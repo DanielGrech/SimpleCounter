@@ -1,5 +1,7 @@
 package com.gtecklabs.simplecounter;
 
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -16,6 +18,10 @@ import javax.inject.Inject;
 
 public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivity> {
 
+  private static final String STATE_KEY_NAME = "name";
+  private static final String STATE_KEY_DESCRIPTION = "description";
+  private static final String STATE_KEY_COLOR = "color";
+
   @Inject
   CountLoader mCountLoader;
 
@@ -30,12 +36,34 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     component.newActivityComponent(new ActivityModule(getActivity())).inject(this);
   }
 
+  @Override
+  public boolean onBackPressed() {
+    // TODO: Only allow going back if no changes made..
+    return super.onBackPressed();
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putString(STATE_KEY_NAME, getActivity().getNameFromUserInput());
+    outState.putString(STATE_KEY_DESCRIPTION, getActivity().getDescriptionFromUserInput());
+    outState.putInt(STATE_KEY_COLOR, getActivity().getColorFromUserInput());
+  }
+
+  @Override
+  public void onRestoreInstanceState(Bundle state) {
+    getActivity().setUserInputName(state.getString(STATE_KEY_NAME));
+    getActivity().setUserInputDescription(state.getString(STATE_KEY_DESCRIPTION));
+    getActivity().setUserInputColor(state.getInt(STATE_KEY_COLOR, Color.BLACK));
+    super.onRestoreInstanceState(state);
+  }
+
   void onDoneClicked() {
     if (!validateUserInput()) {
       return;
     }
 
-    final String title = getActivity().getTitleFromUserInput();
+    final String title = getActivity().getNameFromUserInput();
     final String description = getActivity().getDescriptionFromUserInput();
     final int color = getActivity().getColorFromUserInput();
 
@@ -43,15 +71,9 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     saveAndClose(newCountToSave);
   }
 
-  @Override
-  public boolean onBackPressed() {
-    // TODO: Only allow going back if no changes made..
-    return super.onBackPressed();
-  }
-
 
   private boolean validateUserInput() {
-    if (TextUtils.isEmpty(getActivity().getTitleFromUserInput())) {
+    if (TextUtils.isEmpty(getActivity().getNameFromUserInput())) {
       getActivity().showErrorForMissingName(getActivity().getString(R.string.error_new_counter_missing_name));
       return false;
     }
