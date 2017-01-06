@@ -89,7 +89,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public static final DbField ID = new DbField("_id", "integer", "primary key");
     public static final DbField TITLE = new DbField("title", "text");
     public static final DbField DESCRIPTION = new DbField("description", "text");
-    public static final DbField COLOR = new DbField("value", "integer");
+    public static final DbField COLOR = new DbField("color", "integer");
     public static final DbField VALUE = new DbField("value", "real");
   }
 
