@@ -2,6 +2,8 @@ package com.gtecklabs.simplecounter.view;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.GridLayout;
@@ -15,6 +17,16 @@ public class ColorPickerView extends GridLayout {
 
   private final int mRowCount;
   private final int mColumnCount;
+
+  private final OnClickListener mOnColorClickedListener = new OnClickListener() {
+    @Override
+    public void onClick(View view) {
+      for (int i = 0, childCount = getChildCount(); i < childCount; i++) {
+        final View child = getChildAt(i);
+        child.setSelected(child == view);
+      }
+    }
+  };
 
   public ColorPickerView(Context context) {
     this(context, null);
@@ -38,12 +50,26 @@ public class ColorPickerView extends GridLayout {
     setupColors();
   }
 
+  @ColorInt
+  public int getSelectedColor() {
+    for (int i = 0, childCount = getChildCount(); i < childCount; i++) {
+      final ColorPickerItemView view = (ColorPickerItemView) getChildAt(i);
+      if (view.isSelected()) {
+        return view.getColor();
+      }
+    }
+
+    return Color.BLACK;
+  }
+
   private void setupColors() {
     final int gridItemSize = getResources().getDimensionPixelSize(R.dimen.new_counter_color_picker_tile_size);
     final int gridMargins = getResources().getDimensionPixelOffset(R.dimen.padding_small);
     for (int row = 0; row < mRowCount; row++) {
       for (int col = 0; col < mColumnCount; col++) {
         final View view = new ColorPickerItemView(getContext(), COLORS[(mColumnCount * row) + col]);
+        view.setOnClickListener(mOnColorClickedListener);
+        view.setSelected(row == 0 && col == 0);
 
         final LayoutParams layoutParams = new LayoutParams(spec(row), spec(col));
         layoutParams.width = gridItemSize;

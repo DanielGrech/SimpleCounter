@@ -10,6 +10,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
+import com.gtecklabs.simplecounter.view.ColorPickerView;
 
 public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCounterPresenter> {
 
@@ -21,6 +22,9 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
 
   @BindView(R.id.description)
   EditText mDescriptionInput;
+
+  @BindView(R.id.color_picker)
+  ColorPickerView mColorPicker;
 
   @Override
   protected int getLayoutResId() {
@@ -79,8 +83,7 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
 
   @ColorInt
   public int getColorFromUserInput() {
-    // TODO: Get user selected color
-    return 0;
+    return mColorPicker.getSelectedColor();
   }
 
   public void showErrorForMissingName(String errorMessage) {
