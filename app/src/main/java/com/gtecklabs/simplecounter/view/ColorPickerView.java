@@ -2,7 +2,6 @@ package com.gtecklabs.simplecounter.view;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.GridLayout;
@@ -44,7 +43,7 @@ public class ColorPickerView extends GridLayout {
     final int gridMargins = getResources().getDimensionPixelOffset(R.dimen.padding_small);
     for (int row = 0; row < mRowCount; row++) {
       for (int col = 0; col < mColumnCount; col++) {
-        final View view = createColorView(COLORS[(mColumnCount * row) + col]);
+        final View view = new ColorPickerItemView(getContext(), COLORS[(mColumnCount * row) + col]);
 
         final LayoutParams layoutParams = new LayoutParams(spec(row), spec(col));
         layoutParams.width = gridItemSize;
@@ -54,12 +53,6 @@ public class ColorPickerView extends GridLayout {
         addView(view, layoutParams);
       }
     }
-  }
-
-  private View createColorView(@ColorInt int color) {
-    View view = new View(getContext());
-    view.setBackgroundColor(color);
-    return view;
   }
 
   private boolean isInLandscape() {

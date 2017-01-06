@@ -109,13 +109,18 @@
           android:textAppearance="@style/TextAppearance.AppCompat.Caption"
           android:text="@string/new_counter_input_color_description"/>
 
-      <com.gtecklabs.simplecounter.view.ColorPickerView
-          android:id="@+id/color_picker"
+      <HorizontalScrollView
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingStart="@dimen/text_label_padding"
-          android:paddingEnd="@dimen/text_label_padding"/>
+          android:layout_height="wrap_content">
 
+        <com.gtecklabs.simplecounter.view.ColorPickerView
+            android:id="@+id/color_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/text_label_padding"
+            android:paddingEnd="@dimen/text_label_padding"/>
+
+      </HorizontalScrollView>
     </LinearLayout>
   </ScrollView>
 
