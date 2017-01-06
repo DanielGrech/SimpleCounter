@@ -7,5 +7,5 @@
   <dimen name="text_label_padding">4dp</dimen>
 
   <dimen name="new_counter_horizontal_padding">30dp</dimen>
-  <dimen name="new_counter_color_picker_height">100dp</dimen>
+  <dimen name="new_counter_color_picker_tile_size">64dp</dimen>
 </resources>

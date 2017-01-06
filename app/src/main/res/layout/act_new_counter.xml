@@ -112,7 +112,7 @@
       <com.gtecklabs.simplecounter.view.ColorPickerView
           android:id="@+id/color_picker"
           android:layout_width="match_parent"
-          android:layout_height="@dimen/new_counter_color_picker_height"
+          android:layout_height="wrap_content"
           android:paddingStart="@dimen/text_label_padding"
           android:paddingEnd="@dimen/text_label_padding"/>
 
