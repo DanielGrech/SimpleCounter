@@ -16,4 +16,5 @@
   <string name="new_count_success_messsage">Saved!</string>
   <string name="error_incrementing_count">Error incrementing count</string>
   <string name="error_decrementing_count">Error decrementing count</string>
+  <string name="error_loading_count">Error opening count</string>
 </resources>

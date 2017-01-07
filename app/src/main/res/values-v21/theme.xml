@@ -8,4 +8,6 @@
 
   <style name="AppTheme" parent="AppTheme.v21Base" />
 
+  <style name="AppTheme.ViewCounter" parent="AppTheme.v21Base" />
+
 </resources>

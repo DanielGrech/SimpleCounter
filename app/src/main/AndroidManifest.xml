@@ -25,7 +25,8 @@
 
     <activity
         android:name=".ViewCounterActivity"
-        android:windowSoftInputMode="stateHidden"/>
+        android:windowSoftInputMode="stateHidden"
+        android:theme="@style/AppTheme.ViewCounter"/>
 
   </application>
 
