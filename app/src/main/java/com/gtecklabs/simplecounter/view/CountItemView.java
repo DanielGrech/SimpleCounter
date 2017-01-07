@@ -1,10 +1,11 @@
 package com.gtecklabs.simplecounter.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -13,13 +14,19 @@ import com.gtecklabs.simplecounter.model.Count;
 
 import java.util.Locale;
 
-public class CountItemView extends LinearLayout {
+public class CountItemView extends CardView {
 
   @BindView(R.id.rounded_background)
   CountListItemRoundedBackgroundView mRoundedBackgroundView;
 
   @BindView(R.id.count_value)
   TextView mCountValue;
+
+  @BindView(R.id.name)
+  TextView mName;
+
+  @BindView(R.id.description)
+  TextView mDescription;
 
   public static CountItemView inflate(ViewGroup parent) {
     return (CountItemView) LayoutInflater.from(parent.getContext())
@@ -36,7 +43,6 @@ public class CountItemView extends LinearLayout {
 
   public CountItemView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
-    setOrientation(HORIZONTAL);
   }
 
   @Override
@@ -54,6 +60,13 @@ public class CountItemView extends LinearLayout {
     }
 
     mRoundedBackgroundView.setColor(count.color());
+    mName.setText(count.title());
+    if (TextUtils.isEmpty(count.description())) {
+      mDescription.setVisibility(GONE);
+    } else {
+      mDescription.setVisibility(VISIBLE);
+      mDescription.setText(count.description());
+    }
   }
 
   static boolean isWholeNumber(float value) {

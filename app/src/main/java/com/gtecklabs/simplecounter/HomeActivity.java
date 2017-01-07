@@ -81,5 +81,6 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
 
     mCountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     mCountRecyclerView.setAdapter(mAdapter);
+    mCountRecyclerView.setHasFixedSize(true);
   }
 }
