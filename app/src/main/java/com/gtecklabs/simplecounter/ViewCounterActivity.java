@@ -8,6 +8,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import butterknife.BindView;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -68,6 +69,19 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
       @Override
       public void onClick(View view) {
         onBackPressed();
+      }
+    });
+
+    mToolbar.inflateMenu(R.menu.act_view_counter);
+    mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+      @Override
+      public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.delete) {
+          getPresenter().onDeleteClicked();
+          return true;
+        }
+
+        return false;
       }
     });
   }

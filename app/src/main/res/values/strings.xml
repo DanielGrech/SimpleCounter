@@ -17,4 +17,7 @@
   <string name="error_incrementing_count">Error incrementing count</string>
   <string name="error_decrementing_count">Error decrementing count</string>
   <string name="error_loading_count">Error opening count</string>
+  <string name="view_counter_delete_action">Delete</string>
+  <string name="view_counter_success_message">Deleted\!</string>
+  <string name="error_view_counter_delete">Error deleting counter</string>
 </resources>

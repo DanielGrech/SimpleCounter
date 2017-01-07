@@ -52,6 +52,19 @@ public class CountLoader {
     return query.mapToOne(mCursorCountMapping);
   }
 
+  public Observable<Void> deleteCount(final long id) {
+    return Observable.fromCallable(new Callable<Void>() {
+      @Override
+      public Void call() throws Exception {
+        mDatabase.delete(
+            COUNT_TABLE_NAME,
+            String.format("%s = ?", DbOpenHelper.Field.ID.getName()),
+            String.valueOf(id));
+        return null;
+      }
+    });
+  }
+
   public Observable<Count> saveCount(final Count count) {
     return Observable.fromCallable(new Callable<Count>() {
       @Override

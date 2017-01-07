@@ -59,4 +59,21 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
           }
         });
   }
+
+  void onDeleteClicked() {
+    subscribe(
+        mCountLoader.deleteCount(mCountId),
+        new BaseSubscriber<Void>() {
+          @Override
+          public void onError(Throwable e) {
+            mToaster.toastShort(R.string.error_view_counter_delete);
+          }
+
+          @Override
+          public void onNext(Void unused) {
+            mToaster.toastShort(R.string.view_counter_success_message);
+            getActivity().finish();
+          }
+        });
+  }
 }
