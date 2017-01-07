@@ -10,6 +10,7 @@ import com.gtecklabs.simplecounter.foundation.BaseActivityPresenter;
 import com.gtecklabs.simplecounter.foundation.BaseSubscriber;
 import com.gtecklabs.simplecounter.model.Count;
 import com.gtecklabs.simplecounter.util.Toaster;
+import com.gtecklabs.simplecounter.view.CountItemView;
 import timber.log.Timber;
 
 import javax.inject.Inject;
@@ -52,6 +53,10 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
 
   void onFabClicked(View fabView) {
     getNavigator().goToNewCounterScreen(fabView);
+  }
+
+  public void onCountClicked(CountItemView view, Count count) {
+    getNavigator().goToViewCountScreen(view, count);
   }
 
   void onIncrementCountClicked(Count count) {

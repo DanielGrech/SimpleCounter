@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
 import com.gtecklabs.simplecounter.model.Count;
+import com.gtecklabs.simplecounter.view.CountItemView;
 
 import java.util.List;
 
@@ -82,6 +83,12 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   private void setupRecyclerView() {
     mAdapter = new CountListAdapter();
     mAdapter.setListener(new CountListAdapter.Listener() {
+
+      @Override
+      public void onCountClicked(CountItemView view, Count count) {
+        getPresenter().onCountClicked(view, count);
+      }
+
       @Override
       public void onIncrementClicked(Count count) {
         getPresenter().onIncrementCountClicked(count);

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.view.View;
+import com.gtecklabs.simplecounter.model.Count;
+import com.gtecklabs.simplecounter.view.CountItemView;
 
 public class Navigator {
 
@@ -17,6 +19,10 @@ public class Navigator {
 
   public void goToNewCounterScreen(@Nullable View sourceView) {
     startActivityFromView(new Intent(mActivity, NewCounterActivity.class), sourceView);
+  }
+
+  public void goToViewCountScreen(CountItemView sourceView, Count count) {
+    // TODO: Start 'view' activity
   }
 
   private void startActivityFromView(Intent intent, @Nullable View sourceView) {

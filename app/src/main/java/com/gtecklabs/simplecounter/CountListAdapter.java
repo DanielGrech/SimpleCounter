@@ -14,6 +14,8 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
 
   public interface Listener {
 
+    void onCountClicked(CountItemView countItemView, Count count);
+
     void onIncrementClicked(Count count);
 
     void onDecrementClicked(Count count);
@@ -61,7 +63,7 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
     notifyDataSetChanged();
   }
 
-  class CountViewHolder extends RecyclerView.ViewHolder implements CountItemView.Listener {
+  class CountViewHolder extends RecyclerView.ViewHolder implements CountItemView.Listener, View.OnClickListener {
 
     CountViewHolder(CountItemView itemView) {
       super(itemView);
@@ -70,8 +72,16 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
     void bind(Count count) {
       CountItemView countItemView = (CountItemView) itemView;
 
+      countItemView.setOnClickListener(this);
       countItemView.setListener(this);
       countItemView.bind(count);
+    }
+
+    @Override
+    public void onClick(View view) {
+      if (mListener != null) {
+        mListener.onCountClicked((CountItemView) view, getCount());
+      }
     }
 
     @Override
