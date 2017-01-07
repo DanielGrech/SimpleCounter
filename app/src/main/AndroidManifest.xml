@@ -23,6 +23,10 @@
         android:name=".NewCounterActivity"
         android:windowSoftInputMode="stateHidden"/>
 
+    <activity
+        android:name=".ViewCounterActivity"
+        android:windowSoftInputMode="stateHidden"/>
+
   </application>
 
 </manifest>

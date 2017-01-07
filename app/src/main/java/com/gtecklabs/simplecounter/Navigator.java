@@ -21,8 +21,8 @@ public class Navigator {
     startActivityFromView(new Intent(mActivity, NewCounterActivity.class), sourceView);
   }
 
-  public void goToViewCountScreen(CountItemView sourceView, Count count) {
-    // TODO: Start 'view' activity
+  public void goToViewCountScreen(@Nullable CountItemView sourceView, Count count) {
+    startActivityFromView(ViewCounterActivity.createIntent(mActivity, count.id()), sourceView);
   }
 
   private void startActivityFromView(Intent intent, @Nullable View sourceView) {
