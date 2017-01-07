@@ -8,8 +8,10 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import butterknife.BindView;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
@@ -25,6 +27,9 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
 
   @BindView(R.id.toolbar)
   Toolbar mToolbar;
+
+  @BindView(R.id.description)
+  TextView mDescription;
 
   public static Intent createIntent(Context context, long id) {
     return new Intent(context, ViewCounterActivity.class).putExtra(ViewCounterPresenter.EXTRA_COUNT_ID, id);
@@ -53,8 +58,14 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
 
   void bind(Count count) {
     mCollapsingToolbar.setTitle(count.title());
-    mCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
-    mCollapsingToolbar.setExpandedTitleColor(Color.WHITE);
+
+    if (TextUtils.isEmpty(count.description())) {
+      mDescription.setVisibility(View.GONE);
+    } else {
+      mDescription.setVisibility(View.VISIBLE);
+      mDescription.setText(count.description());
+    }
+
     setToolbarColor(count.color());
   }
 
@@ -65,6 +76,9 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   }
 
   private void setupToolbar() {
+    mCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
+    mCollapsingToolbar.setExpandedTitleColor(Color.WHITE);
+
     mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

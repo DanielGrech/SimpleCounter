@@ -43,7 +43,17 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:clipToPadding="false"
+      android:paddingTop="@dimen/padding_default"
       app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/padding_default"
+        android:textStyle="italic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
   </android.support.v4.widget.NestedScrollView>
 
