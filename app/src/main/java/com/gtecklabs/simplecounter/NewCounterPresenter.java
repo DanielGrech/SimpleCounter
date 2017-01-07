@@ -18,6 +18,8 @@ import javax.inject.Inject;
 
 public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivity> {
 
+  static String EXTRA_EDIT_COUNT_ID = "count_id";
+
   private static final String STATE_KEY_NAME = "name";
   private static final String STATE_KEY_DESCRIPTION = "description";
   private static final String STATE_KEY_COLOR = "color";
@@ -28,12 +30,41 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
   @Inject
   Toaster mToaster;
 
+  private @Nullable Count mCountToEdit;
+
+  private long mEditingCount = Count.NO_ID;
+
   public NewCounterPresenter(NewCounterActivity activity) {
     super(activity);
   }
 
   protected void inject(DiComponent component) {
     component.newActivityComponent(new ActivityModule(getActivity())).inject(this);
+  }
+
+  @Override
+  public void onCreate(@Nullable Bundle bundle) {
+    super.onCreate(bundle);
+    mEditingCount = getActivity().getIntent().getLongExtra(EXTRA_EDIT_COUNT_ID, Count.NO_ID);
+    if (mEditingCount != Count.NO_ID) {
+      subscribe(
+          mCountLoader.getCount(mEditingCount),
+          new BaseSubscriber<Count>() {
+            @Override
+            public void onError(Throwable e) {
+              mToaster.toastLong(R.string.error_loading_count);
+              getActivity().finish();
+            }
+
+            @Override
+            public void onNext(Count count) {
+              mCountToEdit = count;
+              getActivity().setUserInputName(count.title());
+              getActivity().setUserInputDescription(count.description());
+              getActivity().setUserInputColor(count.color());
+            }
+          });
+    }
   }
 
   @Override
@@ -98,12 +129,15 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     });
   }
 
-  private static Count getCountFromUserInput(String title, @Nullable String description, @ColorInt int color) {
-    return Count.builder()
-        .title(title)
-        .description(description)
-        .color(color)
-        .build();
+  private Count getCountFromUserInput(String title, @Nullable String description, @ColorInt int color) {
+    final Count.Builder builder;
+    if (mCountToEdit == null) {
+      builder = Count.builder();
+    } else {
+      builder = mCountToEdit.toBuilder();
+    }
+
+    return builder.title(title).description(description).color(color).build();
 
   }
 }

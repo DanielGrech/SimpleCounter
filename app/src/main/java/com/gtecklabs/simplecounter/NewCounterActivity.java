@@ -1,5 +1,7 @@
 package com.gtecklabs.simplecounter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -25,6 +27,14 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
 
   @BindView(R.id.color_picker)
   ColorPickerView mColorPicker;
+
+  public static Intent createIntentForNewCount(Context context) {
+    return new Intent(context, NewCounterActivity.class);
+  }
+
+  public static Intent createIntentForEdit(Context context, long countId) {
+    return new Intent(context, NewCounterActivity.class).putExtra(NewCounterPresenter.EXTRA_EDIT_COUNT_ID, countId);
+  }
 
   @Override
   protected int getLayoutResId() {

@@ -70,6 +70,17 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
     });
   }
 
+  @Override
+  protected void onPause() {
+    super.onPause();
+    getPresenter().onUserChangedValue(Float.parseFloat(String.valueOf(mValueText.getText())));
+  }
+
+  @OnClick(R.id.fab)
+  void onEditFabClicked(View fabView) {
+    getPresenter().onEditClicked(fabView);
+  }
+
   @OnClick(R.id.increment)
   void onIncrementClicked() {
     getPresenter().onIncrementClicked();
@@ -145,7 +156,7 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
     private final EditText mEditText;
     private final Listener mListener;
 
-    private CharSequence mLastValue = "";
+    private String mLastValue = "";
 
     private CountValueTextWatcher(EditText editText, Listener listener) {
       mEditText = editText;
@@ -173,9 +184,45 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
       }
 
       if (!TextUtils.equals(mLastValue, editable)) {
-        mLastValue = String.valueOf(editable);
-        mListener.onValueChanged(Float.parseFloat(String.valueOf(mLastValue)));
+        mLastValue = editable == null || editable.length() == 0 ? mLastValue : String.valueOf(editable);
+
+        if (shouldTriggerReload(mLastValue)) {
+          mListener.onValueChanged(Float.parseFloat(String.valueOf(mLastValue)));
+        }
       }
+    }
+
+    static boolean shouldTriggerReload(String value) {
+      if (endsWithDecimalCharacter(value)) {
+        return false;
+      }
+
+      while (!value.isEmpty() && value.charAt(value.length() - 1) == '0') {
+        value = value.substring(0, value.length() - 1);
+      }
+
+      boolean containsNonZero = false;
+      for (int i = 0; i < value.length(); i++) {
+        if (value.charAt(i) != '0') {
+          containsNonZero = true;
+          break;
+        }
+      }
+
+      if (!containsNonZero) {
+        return false;
+      }
+
+      return !endsWithDecimalCharacter(value);
+    }
+
+    static boolean endsWithDecimalCharacter(String value) {
+      if (value.isEmpty()) {
+        return false;
+      }
+
+      final char lastChar = value.charAt(value.length() - 1);
+      return lastChar == '.' || lastChar == ',';
     }
   }
 }

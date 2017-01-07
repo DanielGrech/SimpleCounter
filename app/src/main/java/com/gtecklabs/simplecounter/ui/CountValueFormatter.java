@@ -8,7 +8,12 @@ public class CountValueFormatter {
     if (isWholeNumber(value)) {
       return String.format(Locale.getDefault(), "%.0f", value);
     } else {
-      return String.format(Locale.getDefault(), "%.2f", value);
+      final String formatted = String.format(Locale.getDefault(), "%.2f", value);
+      if (formatted.charAt(formatted.length() - 1) == '0') {
+        return formatted.substring(0, formatted.length() - 1);
+      } else {
+        return formatted;
+      }
     }
   }
 

@@ -18,7 +18,11 @@ public class Navigator {
   }
 
   public void goToNewCounterScreen(@Nullable View sourceView) {
-    startActivityFromView(new Intent(mActivity, NewCounterActivity.class), sourceView);
+    startActivityFromView(NewCounterActivity.createIntentForNewCount(mActivity), sourceView);
+  }
+
+  public void goToEditCounterScreen(@Nullable View sourceView, Count count) {
+    startActivityFromView(NewCounterActivity.createIntentForEdit(mActivity, count.id()), sourceView);
   }
 
   public void goToViewCountScreen(@Nullable CountItemView sourceView, Count count) {

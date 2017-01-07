@@ -2,6 +2,7 @@ package com.gtecklabs.simplecounter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import com.gtecklabs.simplecounter.data.CountLoader;
 import com.gtecklabs.simplecounter.di.ActivityModule;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -10,6 +11,7 @@ import com.gtecklabs.simplecounter.foundation.BaseSubscriber;
 import com.gtecklabs.simplecounter.model.Count;
 import com.gtecklabs.simplecounter.util.Preconditions;
 import com.gtecklabs.simplecounter.util.Toaster;
+import timber.log.Timber;
 
 import javax.inject.Inject;
 
@@ -51,6 +53,7 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
         new BaseSubscriber<Count>() {
           @Override
           public void onError(Throwable e) {
+            Timber.e(e, "Error loading count");
             mToaster.toastLong(R.string.error_loading_count);
             getActivity().finish();
           }
@@ -63,12 +66,19 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
         });
   }
 
+  void onEditClicked(View sourceView) {
+    if (mCount != null) {
+      getNavigator().goToEditCounterScreen(sourceView, mCount);
+    }
+  }
+
   void onDeleteClicked() {
     subscribe(
         mCountLoader.deleteCount(mCountId),
         new BaseSubscriber<Void>() {
           @Override
           public void onError(Throwable e) {
+            Timber.e(e, "Error deleting count");
             mToaster.toastShort(R.string.error_view_counter_delete);
           }
 
@@ -90,6 +100,7 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
         new BaseSubscriber<Count>() {
           @Override
           public void onError(Throwable e) {
+            Timber.e(e, "Error incrementing count");
             mToaster.toastShort(R.string.error_incrementing_count);
           }
         });
@@ -105,6 +116,7 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
         new BaseSubscriber<Count>() {
           @Override
           public void onError(Throwable e) {
+            Timber.e(e, "Error decrementing count");
             mToaster.toastShort(R.string.error_decrementing_count);
           }
         });
