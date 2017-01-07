@@ -44,6 +44,12 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
         mCountLoader.getAllCounts(),
         new BaseSubscriber<List<Count>>() {
           @Override
+          public void onError(Throwable e) {
+            Timber.e(e, "Error loading counts");
+            // TODO: Show error!
+          }
+
+          @Override
           public void onNext(List<Count> counts) {
             Timber.d("Reloaded all counts: %s", counts);
             getActivity().bind(counts);
@@ -65,6 +71,7 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
         new BaseSubscriber<Count>() {
           @Override
           public void onError(Throwable e) {
+            Timber.e(e, "Error incrementing count");
             mToaster.toastShort(R.string.error_incrementing_count);
           }
 
@@ -81,6 +88,7 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
         new BaseSubscriber<Count>() {
           @Override
           public void onError(Throwable e) {
+            Timber.e(e, "Error decrementing count");
             mToaster.toastShort(R.string.error_decrementing_count);
           }
 

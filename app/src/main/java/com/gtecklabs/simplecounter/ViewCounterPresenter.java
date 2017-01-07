@@ -66,6 +66,16 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
         });
   }
 
+  @Override
+  public void onPause() {
+    if (mCount != null) {
+      final float userValue = getActivity().getUserValue();
+      if (mCount.value() != userValue) {
+        onUserChangedValue(userValue);
+      }
+    }
+  }
+
   void onEditClicked(View sourceView) {
     if (mCount != null) {
       getNavigator().goToEditCounterScreen(sourceView, mCount);
@@ -85,6 +95,7 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
           @Override
           public void onNext(Void unused) {
             mToaster.toastShort(R.string.view_counter_success_message);
+            mCount = null;
             getActivity().finish();
           }
         });
@@ -133,6 +144,11 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
           @Override
           public void onNext(Count count) {
             // No-op. Value will reload automatically
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            Timber.e(e, "Error changing user value");
           }
         });
   }

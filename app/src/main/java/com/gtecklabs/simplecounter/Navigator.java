@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import com.gtecklabs.simplecounter.model.Count;
@@ -31,7 +32,7 @@ public class Navigator {
 
   private void startActivityFromView(Intent intent, @Nullable View sourceView) {
     if (sourceView == null) {
-      mActivity.startActivity(intent);
+      startActivity(intent, null /* activityOptions */);
     } else {
       final int w = sourceView.getWidth();
       final int h = sourceView.getHeight();
@@ -43,7 +44,20 @@ public class Navigator {
         activityOptions = ActivityOptions.makeScaleUpAnimation(sourceView, w / 2, h / 2, w, h);
       }
 
-      mActivity.startActivity(intent, activityOptions.toBundle());
+      startActivity(intent, activityOptions.toBundle());
+    }
+  }
+
+  private void startActivity(Intent intent, @Nullable Bundle activityOptions) {
+    if (BuildConfig.DEBUG) {
+      // Force GC so that StrictMode works as intended
+      System.gc();
+    }
+
+    if (activityOptions == null) {
+      mActivity.startActivity(intent);
+    } else {
+      mActivity.startActivity(intent, activityOptions);
     }
   }
 }

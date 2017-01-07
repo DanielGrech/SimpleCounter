@@ -39,6 +39,8 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   @BindView(R.id.value)
   EditText mValueText;
 
+  private CountValueTextWatcher mCountTextWatcher;
+
   public static Intent createIntent(Context context, long id) {
     return new Intent(context, ViewCounterActivity.class).putExtra(ViewCounterPresenter.EXTRA_COUNT_ID, id);
   }
@@ -62,7 +64,8 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setupToolbar();
-    CountValueTextWatcher.attach(mValueText, new CountValueTextWatcher.Listener() {
+
+    mCountTextWatcher = CountValueTextWatcher.attach(mValueText, new CountValueTextWatcher.Listener() {
       @Override
       public void onValueChanged(float value) {
         getPresenter().onUserChangedValue(value);
@@ -71,9 +74,11 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   }
 
   @Override
-  protected void onPause() {
-    super.onPause();
-    getPresenter().onUserChangedValue(Float.parseFloat(String.valueOf(mValueText.getText())));
+  protected void onDestroy() {
+    mValueText.removeTextChangedListener(mCountTextWatcher);
+    mCountTextWatcher.clear();
+    mCountTextWatcher = null;
+    super.onDestroy();
   }
 
   @OnClick(R.id.fab)
@@ -89,6 +94,13 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   @OnClick(R.id.decrement)
   void onDecrementClicked() {
     getPresenter().onDecrementClicked();
+  }
+
+  float getUserValue() {
+    final Editable text = mValueText.getText();
+    return text == null || text.length() == 0 ?
+        0f :
+        Float.parseFloat(String.valueOf(text));
   }
 
   void bind(Count count) {
@@ -153,8 +165,8 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
       return textWatcher;
     }
 
-    private final EditText mEditText;
-    private final Listener mListener;
+    private EditText mEditText;
+    private Listener mListener;
 
     private String mLastValue = "";
 
@@ -190,6 +202,11 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
           mListener.onValueChanged(Float.parseFloat(String.valueOf(mLastValue)));
         }
       }
+    }
+
+    void clear() {
+      mEditText = null;
+      mListener = null;
     }
 
     static boolean shouldTriggerReload(String value) {
