@@ -2,7 +2,9 @@ package com.gtecklabs.simplecounter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import com.gtecklabs.simplecounter.data.CountLoader;
+import com.gtecklabs.simplecounter.di.ActivityModule;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivityPresenter;
 import com.gtecklabs.simplecounter.foundation.BaseSubscriber;
@@ -26,7 +28,7 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
   }
 
   protected void inject(DiComponent component) {
-    component.inject(this);
+    component.newActivityComponent(new ActivityModule(getActivity())).inject(this);
   }
 
   @Override
@@ -48,8 +50,8 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
         });
   }
 
-  void onFabClicked() {
-    getNavigator().goToNewCounterScreen();
+  void onFabClicked(View fabView) {
+    getNavigator().goToNewCounterScreen(fabView);
   }
 
   void onIncrementCountClicked(Count count) {

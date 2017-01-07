@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -52,8 +53,8 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   }
 
   @OnClick(R.id.fab)
-  void onFabClicked() {
-    getPresenter().onFabClicked();
+  void onFabClicked(View fabView) {
+    getPresenter().onFabClicked(fabView);
   }
 
   void bind(List<Count> counts) {
