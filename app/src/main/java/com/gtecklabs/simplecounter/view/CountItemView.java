@@ -1,0 +1,62 @@
+package com.gtecklabs.simplecounter.view;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import com.gtecklabs.simplecounter.R;
+import com.gtecklabs.simplecounter.model.Count;
+
+import java.util.Locale;
+
+public class CountItemView extends LinearLayout {
+
+  @BindView(R.id.rounded_background)
+  CountListItemRoundedBackgroundView mRoundedBackgroundView;
+
+  @BindView(R.id.count_value)
+  TextView mCountValue;
+
+  public static CountItemView inflate(ViewGroup parent) {
+    return (CountItemView) LayoutInflater.from(parent.getContext())
+        .inflate(R.layout.li_count, parent, false);
+  }
+
+  public CountItemView(Context context) {
+    this(context, null);
+  }
+
+  public CountItemView(Context context, AttributeSet attrs) {
+    this(context, attrs, 0);
+  }
+
+  public CountItemView(Context context, AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+    setOrientation(HORIZONTAL);
+  }
+
+  @Override
+  protected void onFinishInflate() {
+    super.onFinishInflate();
+    ButterKnife.bind(this);
+  }
+
+  public void bind(Count count) {
+    final float value = count.value();
+    if (isWholeNumber(value)) {
+      mCountValue.setText(String.format(Locale.getDefault(), "%.0f", value));
+    } else {
+      mCountValue.setText(String.format(Locale.getDefault(), "%.2f", value));
+    }
+
+    mRoundedBackgroundView.setColor(count.color());
+  }
+
+  static boolean isWholeNumber(float value) {
+    return value % 1f == 0;
+  }
+}

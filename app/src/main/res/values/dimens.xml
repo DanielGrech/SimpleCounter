@@ -8,4 +8,7 @@
 
   <dimen name="new_counter_horizontal_padding">30dp</dimen>
   <dimen name="new_counter_color_picker_tile_size">64dp</dimen>
+
+  <dimen name="count_item_height">100sp</dimen>
+  <dimen name="count_item_rounded_background_width">120sp</dimen>
 </resources>

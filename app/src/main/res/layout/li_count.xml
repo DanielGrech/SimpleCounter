@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gtecklabs.simplecounter.view.CountItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/count_item_height"
+    android:orientation="vertical">
+
+  <com.gtecklabs.simplecounter.view.CountListItemRoundedBackgroundView
+      android:id="@+id/rounded_background"
+      android:layout_height="@dimen/count_item_height"
+      android:layout_width="wrap_content"
+      android:minWidth="@dimen/count_item_rounded_background_width">
+
+    <TextView
+        android:id="@+id/count_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12sp"
+        android:layout_gravity="center"
+        android:textColor="@android:color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
+
+  </com.gtecklabs.simplecounter.view.CountListItemRoundedBackgroundView>
+
+</com.gtecklabs.simplecounter.view.CountItemView>

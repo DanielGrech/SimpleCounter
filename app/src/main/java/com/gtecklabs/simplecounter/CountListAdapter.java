@@ -4,8 +4,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import com.gtecklabs.simplecounter.model.Count;
+import com.gtecklabs.simplecounter.view.CountItemView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,8 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
 
   @Override
   public CountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    TextView tv = new TextView(parent.getContext());
-    return new CountViewHolder(tv);
+    CountItemView itemView = CountItemView.inflate(parent);
+    return new CountViewHolder(itemView);
   }
 
   @Override
@@ -50,12 +50,12 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
 
   static class CountViewHolder extends RecyclerView.ViewHolder {
 
-    public CountViewHolder(View itemView) {
+    CountViewHolder(View itemView) {
       super(itemView);
     }
 
     void bind(Count count) {
-      ((TextView) itemView).setText(count.toString());
+      ((CountItemView) itemView).bind(count);
     }
   }
 }
