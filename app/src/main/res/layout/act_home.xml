@@ -20,7 +20,10 @@
         android:id="@+id/count_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_default"
+        android:paddingTop="@dimen/padding_default"
+        android:paddingStart="@dimen/padding_default"
+        android:paddingEnd="@dimen/padding_default"
+        android:paddingBottom="72dp"
         android:clipToPadding="false"/>
 
   </LinearLayout>
