@@ -20,4 +20,8 @@
   <string name="view_counter_delete_action">Delete</string>
   <string name="view_counter_success_message">Deleted\!</string>
   <string name="error_view_counter_delete">Error deleting counter</string>
+  <string name="new_counter_confirm_exit_title">Are you sure</string>
+  <string name="new_counter_confirm_exit_message">Any changes you\'ve made will be lost</string>
+  <string name="new_counter_confirm_exit_confirmation">Yes, exit</string>
+  <string name="new_counter_confirm_exit_cancel">Cancel</string>
 </resources>

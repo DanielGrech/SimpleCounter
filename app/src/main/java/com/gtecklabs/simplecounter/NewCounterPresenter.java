@@ -1,9 +1,11 @@
 package com.gtecklabs.simplecounter;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import com.gtecklabs.simplecounter.data.CountLoader;
 import com.gtecklabs.simplecounter.di.ActivityModule;
@@ -34,6 +36,8 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
 
   private long mEditingCount = Count.NO_ID;
 
+  boolean mHasRestoredInstanceState;
+
   public NewCounterPresenter(NewCounterActivity activity) {
     super(activity);
   }
@@ -43,8 +47,8 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
   }
 
   @Override
-  public void onCreate(@Nullable Bundle bundle) {
-    super.onCreate(bundle);
+  public void onCreate(@Nullable final Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
     mEditingCount = getActivity().getIntent().getLongExtra(EXTRA_EDIT_COUNT_ID, Count.NO_ID);
     if (mEditingCount != Count.NO_ID) {
       subscribe(
@@ -59,9 +63,11 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
             @Override
             public void onNext(Count count) {
               mCountToEdit = count;
-              getActivity().setUserInputName(count.title());
-              getActivity().setUserInputDescription(count.description());
-              getActivity().setUserInputColor(count.color());
+              if (!mHasRestoredInstanceState) {
+                getActivity().setUserInputName(count.title());
+                getActivity().setUserInputDescription(count.description());
+                getActivity().setUserInputColor(count.color());
+              }
             }
           });
     }
@@ -69,7 +75,23 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
 
   @Override
   public boolean onBackPressed() {
-    // TODO: Only allow going back if no changes made..
+    final String nameFromUserInput = getActivity().getNameFromUserInput();
+    final String descriptionFromUserInput = getActivity().getDescriptionFromUserInput();
+
+    if (mCountToEdit == null) {
+      if (!TextUtils.isEmpty(nameFromUserInput) || !TextUtils.isEmpty(descriptionFromUserInput)) {
+        showConfirmExitDialog();
+        return true;
+      }
+    } else {
+      if (!TextUtils.equals(nameFromUserInput, mCountToEdit.title()) ||
+          !TextUtils.equals(descriptionFromUserInput, mCountToEdit.description()) ||
+          mCountToEdit.color() != getActivity().getColorFromUserInput()) {
+        showConfirmExitDialog();
+        return true;
+      }
+    }
+
     return super.onBackPressed();
   }
 
@@ -79,6 +101,8 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     outState.putString(STATE_KEY_NAME, getActivity().getNameFromUserInput());
     outState.putString(STATE_KEY_DESCRIPTION, getActivity().getDescriptionFromUserInput());
     outState.putInt(STATE_KEY_COLOR, getActivity().getColorFromUserInput());
+
+    mHasRestoredInstanceState = false;
   }
 
   @Override
@@ -86,6 +110,9 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     getActivity().setUserInputName(state.getString(STATE_KEY_NAME));
     getActivity().setUserInputDescription(state.getString(STATE_KEY_DESCRIPTION));
     getActivity().setUserInputColor(state.getInt(STATE_KEY_COLOR, Color.BLACK));
+
+    mHasRestoredInstanceState = true;
+
     super.onRestoreInstanceState(state);
   }
 
@@ -102,6 +129,25 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     saveAndClose(newCountToSave);
   }
 
+
+  private void showConfirmExitDialog() {
+    new AlertDialog.Builder(getActivity())
+        .setTitle(R.string.new_counter_confirm_exit_title)
+        .setMessage(R.string.new_counter_confirm_exit_message)
+        .setPositiveButton(R.string.new_counter_confirm_exit_confirmation, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialogInterface, int i) {
+            getActivity().finish();
+          }
+        })
+        .setNegativeButton(R.string.new_counter_confirm_exit_cancel, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int i) {
+            dialog.dismiss();
+          }
+        })
+        .show();
+  }
 
   private boolean validateUserInput() {
     if (TextUtils.isEmpty(getActivity().getNameFromUserInput())) {
