@@ -109,4 +109,19 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
           }
         });
   }
+
+  public void onUserChangedValue(float value) {
+    if (mCount == null) {
+      return;
+    }
+
+    subscribe(
+        mCountLoader.saveCount(mCount.toBuilder().value(value).build()),
+        new BaseSubscriber<Count>() {
+          @Override
+          public void onNext(Count count) {
+            // No-op. Value will reload automatically
+          }
+        });
+  }
 }

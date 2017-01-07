@@ -21,7 +21,8 @@
           android:id="@+id/count_value"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="12sp"
+          android:layout_marginStart="12sp"
+          android:layout_marginEnd="24sp"
           android:layout_gravity="center"
           android:textColor="@android:color/white"
           android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>

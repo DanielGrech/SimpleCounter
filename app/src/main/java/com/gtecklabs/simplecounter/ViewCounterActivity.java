@@ -62,7 +62,12 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setupToolbar();
-    CountValueTextWatcher.attach(mValueText);
+    CountValueTextWatcher.attach(mValueText, new CountValueTextWatcher.Listener() {
+      @Override
+      public void onValueChanged(float value) {
+        getPresenter().onUserChangedValue(value);
+      }
+    });
   }
 
   @OnClick(R.id.increment)
@@ -77,7 +82,12 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
 
   void bind(Count count) {
     mCollapsingToolbar.setTitle(count.title());
-    mValueText.setText(CountValueFormatter.formatValue(count.value()));
+
+    final CharSequence newValueText = CountValueFormatter.formatValue(count.value());
+    final CharSequence currentValueText = mValueText.getText();
+    if (!TextUtils.equals(newValueText, currentValueText)) {
+      mValueText.setText(newValueText);
+    }
 
     if (TextUtils.isEmpty(count.description())) {
       mDescription.setVisibility(View.GONE);
@@ -122,16 +132,24 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
 
   static class CountValueTextWatcher implements TextWatcher {
 
-    static CountValueTextWatcher attach(EditText editText) {
-      CountValueTextWatcher textWatcher = new CountValueTextWatcher(editText);
+    interface Listener {
+      void onValueChanged(float value);
+    }
+
+    static CountValueTextWatcher attach(EditText editText, Listener listener) {
+      CountValueTextWatcher textWatcher = new CountValueTextWatcher(editText, listener);
       editText.addTextChangedListener(textWatcher);
       return textWatcher;
     }
 
     private final EditText mEditText;
+    private final Listener mListener;
 
-    private CountValueTextWatcher(EditText mEditText) {
-      this.mEditText = mEditText;
+    private CharSequence mLastValue = "";
+
+    private CountValueTextWatcher(EditText editText, Listener listener) {
+      mEditText = editText;
+      mListener = listener;
     }
 
     @Override
@@ -147,10 +165,16 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
     @Override
     public void afterTextChanged(Editable editable) {
       if (TextUtils.isEmpty(editable)) {
+        mLastValue = "0";
         mEditText.removeTextChangedListener(this);
-        mEditText.setText("0");
+        mEditText.setText(mLastValue);
         mEditText.setSelection(1);
         mEditText.addTextChangedListener(this);
+      }
+
+      if (!TextUtils.equals(mLastValue, editable)) {
+        mLastValue = String.valueOf(editable);
+        mListener.onValueChanged(Float.parseFloat(String.valueOf(mLastValue)));
       }
     }
   }
