@@ -24,4 +24,5 @@
   <string name="new_counter_confirm_exit_message">Any changes you\'ve made will be lost</string>
   <string name="new_counter_confirm_exit_confirmation">Yes, exit</string>
   <string name="new_counter_confirm_exit_cancel">Cancel</string>
+  <string name="error_loading_counts">Error loading data</string>
 </resources>

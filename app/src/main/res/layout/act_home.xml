@@ -26,6 +26,15 @@
         android:paddingBottom="72dp"
         android:clipToPadding="false"/>
 
+    <TextView
+        android:id="@+id/error_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="@string/error_loading_counts"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
   </LinearLayout>
 
   <android.support.design.widget.FloatingActionButton

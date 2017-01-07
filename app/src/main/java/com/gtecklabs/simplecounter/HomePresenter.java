@@ -46,7 +46,7 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
           @Override
           public void onError(Throwable e) {
             Timber.e(e, "Error loading counts");
-            // TODO: Show error!
+            getActivity().showError();
           }
 
           @Override

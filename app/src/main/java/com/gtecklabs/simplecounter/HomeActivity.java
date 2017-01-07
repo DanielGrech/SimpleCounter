@@ -26,6 +26,9 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   @BindView(R.id.count_list)
   RecyclerView mCountRecyclerView;
 
+  @BindView(R.id.error_view)
+  View mErrorView;
+
   private CountListAdapter mAdapter;
 
   @Override
@@ -61,7 +64,14 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   }
 
   void bind(List<Count> counts) {
+    mCountRecyclerView.setVisibility(View.VISIBLE);
+    mErrorView.setVisibility(View.GONE);
     mAdapter.bind(counts);
+  }
+
+  void showError() {
+    mCountRecyclerView.setVisibility(View.GONE);
+    mErrorView.setVisibility(View.VISIBLE);
   }
 
   private void setupToolbar() {
