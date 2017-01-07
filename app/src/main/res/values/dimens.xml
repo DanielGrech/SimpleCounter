@@ -12,4 +12,5 @@
   <dimen name="count_item_height">100sp</dimen>
   <dimen name="count_item_rounded_background_width">100sp</dimen>
   <dimen name="view_counter_expanded_toolbar_size">200dp</dimen>
+  <dimen name="view_counter_text_size">120sp</dimen>
 </resources>

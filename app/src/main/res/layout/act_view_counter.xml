@@ -5,7 +5,9 @@
     android:id="@+id/root_container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
   <android.support.design.widget.AppBarLayout
       android:id="@+id/app_bar_layout"
@@ -46,14 +48,79 @@
       android:paddingTop="@dimen/padding_default"
       app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:padding="@dimen/padding_default"
-        android:textStyle="italic"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+        android:orientation="vertical">
+
+      <TextView
+          android:id="@+id/description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:padding="@dimen/padding_default"
+          android:textStyle="italic"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+      <Space
+          android:layout_width="1dp"
+          android:layout_height="0dp"
+          android:layout_weight="1"/>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/standard_touch_target_size"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/view_counter_text_size"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/standard_touch_target_size"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/value"
+            android:paddingStart="@dimen/padding_small"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+          <ImageView
+              android:id="@+id/increment"
+              android:layout_width="@dimen/standard_touch_target_size"
+              android:layout_height="@dimen/standard_touch_target_size"
+              android:padding="@dimen/padding_small"
+              android:src="@drawable/ic_arrow_up"
+              android:tint="?android:attr/textColorSecondary"
+              android:background="?attr/selectableItemBackgroundBorderless"/>
+
+          <ImageView
+              android:id="@+id/decrement"
+              android:layout_width="@dimen/standard_touch_target_size"
+              android:layout_height="@dimen/standard_touch_target_size"
+              android:padding="@dimen/padding_small"
+              android:src="@drawable/ic_arrow_down"
+              android:tint="?android:attr/textColorSecondary"
+              android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        </LinearLayout>
+
+      </RelativeLayout>
+
+      <Space
+          android:layout_width="1dp"
+          android:layout_height="0dp"
+          android:layout_weight="1"/>
+
+    </LinearLayout>
 
   </android.support.v4.widget.NestedScrollView>
 

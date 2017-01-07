@@ -2,9 +2,9 @@ package com.gtecklabs.simplecounter.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,8 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.gtecklabs.simplecounter.R;
 import com.gtecklabs.simplecounter.model.Count;
-
-import java.util.Locale;
+import com.gtecklabs.simplecounter.ui.CountValueFormatter;
 
 public class CountItemView extends CardView {
 
@@ -79,12 +78,7 @@ public class CountItemView extends CardView {
   }
 
   public void bind(Count count) {
-    final float value = count.value();
-    if (isWholeNumber(value)) {
-      mCountValue.setText(String.format(Locale.getDefault(), "%.0f", value));
-    } else {
-      mCountValue.setText(String.format(Locale.getDefault(), "%.2f", value));
-    }
+    mCountValue.setText(CountValueFormatter.formatValue(count.value()));
 
     mRoundedBackgroundView.setColor(count.color());
     mName.setText(count.title());
@@ -94,9 +88,5 @@ public class CountItemView extends CardView {
       mDescription.setVisibility(VISIBLE);
       mDescription.setText(count.description());
     }
-  }
-
-  static boolean isWholeNumber(float value) {
-    return value % 1f == 0;
   }
 }

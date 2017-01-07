@@ -8,14 +8,19 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.BindView;
+import butterknife.OnClick;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
 import com.gtecklabs.simplecounter.model.Count;
+import com.gtecklabs.simplecounter.ui.CountValueFormatter;
 
 public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewCounterPresenter> {
 
@@ -30,6 +35,9 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
 
   @BindView(R.id.description)
   TextView mDescription;
+
+  @BindView(R.id.value)
+  EditText mValueText;
 
   public static Intent createIntent(Context context, long id) {
     return new Intent(context, ViewCounterActivity.class).putExtra(ViewCounterPresenter.EXTRA_COUNT_ID, id);
@@ -54,10 +62,22 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setupToolbar();
+    CountValueTextWatcher.attach(mValueText);
+  }
+
+  @OnClick(R.id.increment)
+  void onIncrementClicked() {
+    getPresenter().onIncrementClicked();
+  }
+
+  @OnClick(R.id.decrement)
+  void onDecrementClicked() {
+    getPresenter().onDecrementClicked();
   }
 
   void bind(Count count) {
     mCollapsingToolbar.setTitle(count.title());
+    mValueText.setText(CountValueFormatter.formatValue(count.value()));
 
     if (TextUtils.isEmpty(count.description())) {
       mDescription.setVisibility(View.GONE);
@@ -98,5 +118,40 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
         return false;
       }
     });
+  }
+
+  static class CountValueTextWatcher implements TextWatcher {
+
+    static CountValueTextWatcher attach(EditText editText) {
+      CountValueTextWatcher textWatcher = new CountValueTextWatcher(editText);
+      editText.addTextChangedListener(textWatcher);
+      return textWatcher;
+    }
+
+    private final EditText mEditText;
+
+    private CountValueTextWatcher(EditText mEditText) {
+      this.mEditText = mEditText;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+      // No-op
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+      // No-op
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+      if (TextUtils.isEmpty(editable)) {
+        mEditText.removeTextChangedListener(this);
+        mEditText.setText("0");
+        mEditText.setSelection(1);
+        mEditText.addTextChangedListener(this);
+      }
+    }
   }
 }

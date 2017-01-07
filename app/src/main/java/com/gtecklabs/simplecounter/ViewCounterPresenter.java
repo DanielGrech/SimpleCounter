@@ -25,6 +25,8 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
 
   private long mCountId;
 
+  private @Nullable Count mCount;
+
   public ViewCounterPresenter(ViewCounterActivity activity) {
     super(activity);
   }
@@ -55,6 +57,7 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
 
           @Override
           public void onNext(Count count) {
+            mCount = count;
             getActivity().bind(count);
           }
         });
@@ -73,6 +76,36 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
           public void onNext(Void unused) {
             mToaster.toastShort(R.string.view_counter_success_message);
             getActivity().finish();
+          }
+        });
+  }
+
+  void onIncrementClicked() {
+    if (mCount == null) {
+      return;
+    }
+
+    subscribe(
+        mCountLoader.saveCount(mCount.increment()),
+        new BaseSubscriber<Count>() {
+          @Override
+          public void onError(Throwable e) {
+            mToaster.toastShort(R.string.error_incrementing_count);
+          }
+        });
+  }
+
+  void onDecrementClicked() {
+    if (mCount == null) {
+      return;
+    }
+
+    subscribe(
+        mCountLoader.saveCount(mCount.decrement()),
+        new BaseSubscriber<Count>() {
+          @Override
+          public void onError(Throwable e) {
+            mToaster.toastShort(R.string.error_decrementing_count);
           }
         });
   }
