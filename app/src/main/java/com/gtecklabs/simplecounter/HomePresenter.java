@@ -7,6 +7,7 @@ import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivityPresenter;
 import com.gtecklabs.simplecounter.foundation.BaseSubscriber;
 import com.gtecklabs.simplecounter.model.Count;
+import com.gtecklabs.simplecounter.util.Toaster;
 import timber.log.Timber;
 
 import javax.inject.Inject;
@@ -16,6 +17,9 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
 
   @Inject
   CountLoader mCountLoader;
+
+  @Inject
+  Toaster mToaster;
 
   public HomePresenter(HomeActivity activity) {
     super(activity);
@@ -46,5 +50,37 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
 
   void onFabClicked() {
     getNavigator().goToNewCounterScreen();
+  }
+
+  void onIncrementCountClicked(Count count) {
+    subscribe(
+        mCountLoader.saveCount(count.increment()),
+        new BaseSubscriber<Count>() {
+          @Override
+          public void onError(Throwable e) {
+            mToaster.toastShort(R.string.error_incrementing_count);
+          }
+
+          @Override
+          public void onNext(Count count) {
+            // No-op. List will reload automatically
+          }
+        });
+  }
+
+  void onDecrementCountClicked(Count count) {
+    subscribe(
+        mCountLoader.saveCount(count.decrement()),
+        new BaseSubscriber<Count>() {
+          @Override
+          public void onError(Throwable e) {
+            mToaster.toastShort(R.string.error_decrementing_count);
+          }
+
+          @Override
+          public void onNext(Count count) {
+            // No-op. List will reload automatically
+          }
+        });
   }
 }

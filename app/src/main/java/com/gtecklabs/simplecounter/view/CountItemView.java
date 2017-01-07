@@ -1,6 +1,7 @@
 package com.gtecklabs.simplecounter.view;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.support.v7.widget.CardView;
@@ -9,12 +10,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.gtecklabs.simplecounter.R;
 import com.gtecklabs.simplecounter.model.Count;
 
 import java.util.Locale;
 
 public class CountItemView extends CardView {
+
+  public interface Listener {
+
+    void onIncrementClicked(CountItemView view);
+
+    void onDecrementClicked(CountItemView view);
+  }
 
   @BindView(R.id.rounded_background)
   CountListItemRoundedBackgroundView mRoundedBackgroundView;
@@ -27,6 +36,8 @@ public class CountItemView extends CardView {
 
   @BindView(R.id.description)
   TextView mDescription;
+
+  private @Nullable Listener mListener;
 
   public static CountItemView inflate(ViewGroup parent) {
     return (CountItemView) LayoutInflater.from(parent.getContext())
@@ -49,6 +60,22 @@ public class CountItemView extends CardView {
   protected void onFinishInflate() {
     super.onFinishInflate();
     ButterKnife.bind(this);
+  }
+
+  public void setListener(@Nullable Listener listener) {
+    mListener = listener;
+  }
+
+  @OnClick(R.id.increment)
+  void onIncrementClicked() {
+    if (mListener != null) {
+      mListener.onIncrementClicked(this);
+    }
+  }
+
+  @OnClick(R.id.decrement)
+  void onDecrementClicked() {
+    mListener.onDecrementClicked(this);
   }
 
   public void bind(Count count) {

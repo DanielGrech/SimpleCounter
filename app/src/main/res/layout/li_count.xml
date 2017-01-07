@@ -28,8 +28,9 @@
     </com.gtecklabs.simplecounter.view.CountListItemRoundedBackgroundView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingEnd="@dimen/padding_small">
@@ -50,6 +51,33 @@
           android:ellipsize="end"
           android:textColor="?android:attr/textColorSecondary"
           android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/standard_touch_target_size"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/padding_small">
+
+      <ImageView
+          android:id="@+id/increment"
+          android:layout_width="@dimen/standard_touch_target_size"
+          android:layout_height="@dimen/standard_touch_target_size"
+          android:padding="@dimen/padding_small"
+          android:src="@drawable/ic_arrow_up"
+          android:tint="?android:attr/textColorSecondary"
+          android:background="?attr/selectableItemBackgroundBorderless"/>
+
+      <ImageView
+          android:id="@+id/decrement"
+          android:layout_width="@dimen/standard_touch_target_size"
+          android:layout_height="@dimen/standard_touch_target_size"
+          android:padding="@dimen/padding_small"
+          android:src="@drawable/ic_arrow_down"
+          android:tint="?android:attr/textColorSecondary"
+          android:background="?attr/selectableItemBackgroundBorderless"/>
 
     </LinearLayout>
 

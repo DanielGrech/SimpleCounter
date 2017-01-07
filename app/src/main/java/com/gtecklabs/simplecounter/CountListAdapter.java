@@ -12,7 +12,16 @@ import java.util.List;
 
 public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.CountViewHolder> {
 
+  public interface Listener {
+
+    void onIncrementClicked(Count count);
+
+    void onDecrementClicked(Count count);
+  }
+
   private final ArrayList<Count> mData = new ArrayList<>();
+
+  private @Nullable Listener mListener;
 
   public CountListAdapter() {
     setHasStableIds(true);
@@ -39,6 +48,10 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
     return mData.get(position).id();
   }
 
+  public void setListener(@Nullable Listener listener) {
+    mListener = listener;
+  }
+
   public void bind(@Nullable List<Count> data) {
     mData.clear();
     if (data != null) {
@@ -48,14 +61,35 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
     notifyDataSetChanged();
   }
 
-  static class CountViewHolder extends RecyclerView.ViewHolder {
+  class CountViewHolder extends RecyclerView.ViewHolder implements CountItemView.Listener {
 
-    CountViewHolder(View itemView) {
+    CountViewHolder(CountItemView itemView) {
       super(itemView);
     }
 
     void bind(Count count) {
-      ((CountItemView) itemView).bind(count);
+      CountItemView countItemView = (CountItemView) itemView;
+
+      countItemView.setListener(this);
+      countItemView.bind(count);
+    }
+
+    @Override
+    public void onIncrementClicked(CountItemView view) {
+      if (mListener != null) {
+        mListener.onIncrementClicked(getCount());
+      }
+    }
+
+    @Override
+    public void onDecrementClicked(CountItemView view) {
+      if (mListener != null) {
+        mListener.onDecrementClicked(getCount());
+      }
+    }
+
+    private Count getCount() {
+      return mData.get(getAdapterPosition());
     }
   }
 }

@@ -14,4 +14,6 @@
   <string name="error_new_counter_missing_name">Enter a name for this count</string>
   <string name="error_new_counter_saving">Error saving new count</string>
   <string name="new_count_success_messsage">Saved!</string>
+  <string name="error_incrementing_count">Error incrementing count</string>
+  <string name="error_decrementing_count">Error decrementing count</string>
 </resources>

@@ -78,6 +78,17 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
 
   private void setupRecyclerView() {
     mAdapter = new CountListAdapter();
+    mAdapter.setListener(new CountListAdapter.Listener() {
+      @Override
+      public void onIncrementClicked(Count count) {
+        getPresenter().onIncrementCountClicked(count);
+      }
+
+      @Override
+      public void onDecrementClicked(Count count) {
+        getPresenter().onDecrementCountClicked(count);
+      }
+    });
 
     mCountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     mCountRecyclerView.setAdapter(mAdapter);
