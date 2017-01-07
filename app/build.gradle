@@ -26,6 +26,8 @@ android {
         targetSdkVersion config.targetSdkVersion
         versionCode config.versionCode
         versionName config.versionName
+
+        buildConfigField "String", "SUPPORT_EMAIL", "\"dgsoftwaredevelopment@gmail.com\""
     }
 
     buildTypes {
@@ -91,6 +93,7 @@ dependencies {
     compile "com.android.support:design:${versions.androidSupport}"
     compile "com.android.support:support-v4:${versions.androidSupport}"
     compile "com.android.support:recyclerview-v7:${versions.androidSupport}"
+    compile "com.android.support:preference-v14:${versions.androidSupport}"
     compile "com.facebook.rebound:rebound:${versions.rebound}"
     compile "com.google.dagger:dagger:${versions.dagger}"
     compile "com.jakewharton.timber:timber:${versions.timber}"

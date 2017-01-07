@@ -26,4 +26,21 @@
   <string name="new_counter_confirm_exit_cancel">Cancel</string>
   <string name="error_loading_counts">Error loading data</string>
   <string name="count_list_nux_empty_text">Add a new count to get started!</string>
+
+  <string name="app_settings_title">Settings</string>
+  <string name="settings_cat_title_about">About App</string>
+
+  <string name="settings_key_app_version">settings_key_app_version</string>
+  <string name="settings_key_rate">settings_key_rate</string>
+  <string name="settings_key_support">settings_key_support</string>
+  <string name="settings_key_licenses">settings_key_licenses</string>
+
+  <string name="settings_title_app_version">App version</string>
+  <string name="settings_title_rate">Rate app</string>
+  <string name="settings_title_support">Support</string>
+  <string name="settings_title_licenses">Licenses</string>
+
+  <string name="settings_summary_rate">If you like the app, please leave a rating in Google Play</string>
+  <string name="settings_summary_support">Email support with feedback or requests</string>
+  <string name="settings_summary_licenses">Libraries used to create this app</string>
 </resources>

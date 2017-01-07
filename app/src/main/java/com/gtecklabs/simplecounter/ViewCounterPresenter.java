@@ -76,9 +76,9 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
     }
   }
 
-  void onEditClicked(View sourceView) {
+  void onEditClicked() {
     if (mCount != null) {
-      getNavigator().goToEditCounterScreen(sourceView, mCount);
+      getNavigator().goToEditCounterScreen(mCount);
     }
   }
 

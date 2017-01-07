@@ -64,8 +64,8 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   }
 
   @OnClick(R.id.fab)
-  void onFabClicked(View fabView) {
-    getPresenter().onFabClicked(fabView);
+  void onFabClicked() {
+    getPresenter().onFabClicked();
   }
 
   void bind(List<Count> counts) {
@@ -107,7 +107,7 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
       @Override
       public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.settings) {
-          // TODO: Open settings
+          getPresenter().onSettingsClicked();
           return true;
         }
         return false;
@@ -120,8 +120,8 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
     mAdapter.setListener(new CountListAdapter.Listener() {
 
       @Override
-      public void onCountClicked(CountItemView view, Count count) {
-        getPresenter().onCountClicked(view, count);
+      public void onCountClicked(Count count) {
+        getPresenter().onCountClicked(count);
       }
 
       @Override

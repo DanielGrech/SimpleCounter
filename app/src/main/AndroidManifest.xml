@@ -28,6 +28,9 @@
         android:windowSoftInputMode="stateHidden"
         android:theme="@style/AppTheme.ViewCounter"/>
 
+    <activity
+        android:name=".AppPreferenceActivity"/>
+
   </application>
 
 </manifest>

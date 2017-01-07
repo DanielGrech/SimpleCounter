@@ -61,12 +61,16 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
         });
   }
 
-  void onFabClicked(View fabView) {
-    getNavigator().goToNewCounterScreen(fabView);
+  void onSettingsClicked() {
+    getNavigator().goToAppSettingsScreen();
   }
 
-  public void onCountClicked(CountItemView view, Count count) {
-    getNavigator().goToViewCountScreen(view, count);
+  void onFabClicked() {
+    getNavigator().goToNewCounterScreen();
+  }
+
+  void onCountClicked(Count count) {
+    getNavigator().goToViewCountScreen(count);
   }
 
   void onIncrementCountClicked(Count count) {

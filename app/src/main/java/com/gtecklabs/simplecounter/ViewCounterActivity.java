@@ -82,8 +82,8 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   }
 
   @OnClick(R.id.fab)
-  void onEditFabClicked(View fabView) {
-    getPresenter().onEditClicked(fabView);
+  void onEditFabClicked() {
+    getPresenter().onEditClicked();
   }
 
   @OnClick(R.id.increment)

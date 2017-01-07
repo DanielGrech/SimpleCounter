@@ -14,7 +14,7 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
 
   public interface Listener {
 
-    void onCountClicked(CountItemView countItemView, Count count);
+    void onCountClicked(Count count);
 
     void onIncrementClicked(Count count);
 
@@ -80,7 +80,7 @@ public class CountListAdapter extends RecyclerView.Adapter<CountListAdapter.Coun
     @Override
     public void onClick(View view) {
       if (mListener != null) {
-        mListener.onCountClicked((CountItemView) view, getCount());
+        mListener.onCountClicked(getCount());
       }
     }
 

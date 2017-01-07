@@ -6,6 +6,10 @@
     <item name="colorPrimaryDark">@color/primary_dark</item>
     <item name="colorAccent">@color/accent</item>
     <item name="android:windowBackground">@color/window_background</item>
+
+    <!-- Preference Compat-->
+    <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+    <item name="android:activatedBackgroundIndicator">?attr/selectableItemBackground</item>
   </style>
 
   <style name="AppTheme" parent="AppThemeBase"/>
