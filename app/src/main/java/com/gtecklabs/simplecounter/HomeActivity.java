@@ -1,5 +1,6 @@
 package com.gtecklabs.simplecounter;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -94,5 +96,26 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
     mCountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     mCountRecyclerView.setAdapter(mAdapter);
     mCountRecyclerView.setHasFixedSize(true);
+    mCountRecyclerView.addOnScrollListener(new ToolbarBackgroundScrollListener());
+  }
+
+  private class ToolbarBackgroundScrollListener extends RecyclerView.OnScrollListener {
+    boolean mShouldDrawShadow;
+
+    @Override
+    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+      final boolean shouldDrawShadow = recyclerView.computeVerticalScrollOffset() > 0;
+      if (mShouldDrawShadow != shouldDrawShadow) {
+        mShouldDrawShadow = shouldDrawShadow;
+        if (shouldDrawShadow) {
+          mToolbar.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
+          mToolbar.setElevation(getResources().getDimensionPixelSize(R.dimen.default_elevation));
+          mToolbar.setBackgroundColor(Color.WHITE);
+        } else {
+          mToolbar.setOutlineProvider(null);
+          mToolbar.setBackgroundColor(Color.TRANSPARENT);
+        }
+      }
+    }
   }
 }
