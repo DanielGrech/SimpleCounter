@@ -25,4 +25,5 @@
   <string name="new_counter_confirm_exit_confirmation">Yes, exit</string>
   <string name="new_counter_confirm_exit_cancel">Cancel</string>
   <string name="error_loading_counts">Error loading data</string>
+  <string name="count_list_nux_empty_text">Add a new count to get started!</string>
 </resources>

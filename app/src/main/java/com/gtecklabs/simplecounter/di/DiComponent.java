@@ -3,6 +3,7 @@ package com.gtecklabs.simplecounter.di;
 import com.gtecklabs.simplecounter.HomeActivity;
 import com.gtecklabs.simplecounter.NewCounterActivity;
 import com.gtecklabs.simplecounter.ViewCounterActivity;
+import com.gtecklabs.simplecounter.ui.SpringFactory;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -14,6 +15,7 @@ import javax.inject.Singleton;
 @Component(modules = {
     AndroidModule.class,
     DataModule.class,
+    UiModule.class,
 })
 public interface DiComponent {
 
@@ -22,4 +24,5 @@ public interface DiComponent {
   void inject(ViewCounterActivity activity);
 
   ActivityComponent newActivityComponent(ActivityModule module);
+  SpringFactory springFactory();
 }

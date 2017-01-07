@@ -14,7 +14,9 @@ import butterknife.OnClick;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
 import com.gtecklabs.simplecounter.model.Count;
+import com.gtecklabs.simplecounter.util.ViewUtils;
 import com.gtecklabs.simplecounter.view.CountItemView;
+import com.gtecklabs.simplecounter.view.CountListEmptyContainerView;
 
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
 
   @BindView(R.id.error_view)
   View mErrorView;
+
+  @BindView(R.id.empty_view)
+  CountListEmptyContainerView mEmptyView;
 
   private CountListAdapter mAdapter;
 
@@ -72,6 +77,26 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
   void showError() {
     mCountRecyclerView.setVisibility(View.GONE);
     mErrorView.setVisibility(View.VISIBLE);
+  }
+
+  void showEmptyView() {
+    mEmptyView.setVisibility(View.VISIBLE);
+    mCountRecyclerView.setVisibility(View.GONE);
+    mErrorView.setVisibility(View.GONE);
+
+    ViewUtils.onPreDraw(mEmptyView, new Runnable() {
+      @Override
+      public void run() {
+        mEmptyView.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            if (mEmptyView.isShown()) {
+              mEmptyView.animateArrow();
+            }
+          }
+        }, 500);
+      }
+    });
   }
 
   private void setupToolbar() {

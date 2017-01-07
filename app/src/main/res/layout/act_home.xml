@@ -35,6 +35,11 @@
         android:text="@string/error_loading_counts"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
+    <com.gtecklabs.simplecounter.view.CountListEmptyContainerView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
   </LinearLayout>
 
   <android.support.design.widget.FloatingActionButton

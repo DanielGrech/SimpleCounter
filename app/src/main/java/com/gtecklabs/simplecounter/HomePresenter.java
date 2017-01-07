@@ -52,7 +52,11 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
           @Override
           public void onNext(List<Count> counts) {
             Timber.d("Reloaded all counts: %s", counts);
-            getActivity().bind(counts);
+            if (counts.isEmpty()) {
+              getActivity().showEmptyView();
+            } else {
+              getActivity().bind(counts);
+            }
           }
         });
   }
