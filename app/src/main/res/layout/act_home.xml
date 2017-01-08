@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,6 +16,16 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/padding_default"
+        android:visibility="gone"
+        app:adSize="BANNER"
+        app:adUnitId="@string/ad_id_banner_home" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/count_list"

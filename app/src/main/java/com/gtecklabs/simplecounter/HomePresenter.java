@@ -47,6 +47,7 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
               getActivity().showEmptyView();
             } else {
               getActivity().bind(counts);
+              getActivity().showAd();
             }
           }
         });

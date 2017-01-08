@@ -11,13 +11,16 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.google.android.gms.ads.AdView;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
 import com.gtecklabs.simplecounter.model.Count;
+import com.gtecklabs.simplecounter.util.AdManager;
 import com.gtecklabs.simplecounter.util.ViewUtils;
 import com.gtecklabs.simplecounter.view.CountItemView;
 import com.gtecklabs.simplecounter.view.CountListEmptyContainerView;
 
+import javax.inject.Inject;
 import java.util.List;
 
 public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
@@ -33,6 +36,12 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
 
   @BindView(R.id.empty_view)
   CountListEmptyContainerView mEmptyView;
+
+  @BindView(R.id.ad_banner)
+  AdView mAdView;
+
+  @Inject
+  AdManager mAdManager;
 
   private CountListAdapter mAdapter;
 
@@ -72,6 +81,10 @@ public class HomeActivity extends BaseActivity<HomeActivity, HomePresenter> {
     mCountRecyclerView.setVisibility(View.VISIBLE);
     mErrorView.setVisibility(View.GONE);
     mAdapter.bind(counts);
+  }
+
+  void showAd() {
+    mAdManager.maybeShowAd(mAdView);
   }
 
   void showError() {
