@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-  <string name="ad_app_id">ca-app-pub-7157106990325877~1162979340</string>
+  <string name="ad_app_id" tools:ignore="MissingTranslation">ca-app-pub-7157106990325877~1162979340</string>
 
-  <string name="ad_id_banner_home">ca-app-pub-7157106990325877/2639712548</string>
-  <string name="ad_id_banner_view">ca-app-pub-7157106990325877/4116445749</string>
-  <string name="ad_id_banner_new">ca-app-pub-7157106990325877/5593178943</string>
+  <string name="ad_id_banner_home" tools:ignore="MissingTranslation">ca-app-pub-7157106990325877/2639712548</string>
+  <string name="ad_id_banner_view" tools:ignore="MissingTranslation">ca-app-pub-7157106990325877/4116445749</string>
+  <string name="ad_id_banner_new" tools:ignore="MissingTranslation">ca-app-pub-7157106990325877/5593178943</string>
 
 </resources>
