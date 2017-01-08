@@ -8,6 +8,7 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.os.Bundle;
 import android.text.TextUtils;
 import com.gtecklabs.simplecounter.util.IntentUtils;
+import de.psdev.licensesdialog.LicensesDialog;
 
 public class AppPreferenceFragment extends PreferenceFragmentCompat {
 
@@ -59,12 +60,12 @@ public class AppPreferenceFragment extends PreferenceFragmentCompat {
 
         return true;
       } else if (TextUtils.equals(prefKey, mLicensesPref.getKey())) {
-//        new LicensesDialog.Builder(getActivity())
-//            .setTitle(R.string.settings_title_licenses)
-//            .setIncludeOwnLicense(true)
-//            .setNotices(R.raw.licenses)
-//            .build()
-//            .show();
+        new LicensesDialog.Builder(getActivity())
+            .setTitle(R.string.settings_title_licenses)
+            .setIncludeOwnLicense(true)
+            .setNotices(R.raw.licenses)
+            .build()
+            .show();
         return true;
       }
     }

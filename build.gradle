@@ -57,6 +57,7 @@ subprojects {
                 butterknife   : "8.4.0",
                 dagger        : "2.8",
                 jsr250        : "1.0",
+                licensedialog : "1.8.1",
                 rebound       : "0.3.8",
                 rxAndroid     : "1.2.1",
                 rxLifecycle   : "0.8.0",
