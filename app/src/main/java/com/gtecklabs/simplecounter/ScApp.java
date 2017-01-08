@@ -40,12 +40,10 @@ public class ScApp extends Application {
     StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
         .detectAll()
         .penaltyLog()
-        .penaltyDeath()
         .build());
     StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
         .detectAll()
         .penaltyLog()
-        .penaltyDeath()
         .build());
   }
 
