@@ -11,6 +11,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -73,6 +74,19 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setupToolbar();
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+      getPresenter().onIncrementClicked();
+      return true;
+    } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+      getPresenter().onDecrementClicked();
+      return true;
+    }
+
+    return super.onKeyDown(keyCode, event);
   }
 
   @OnClick(R.id.fab)
