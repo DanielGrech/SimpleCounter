@@ -1,8 +1,5 @@
 package com.gtecklabs.simplecounter;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.View;
 import com.gtecklabs.simplecounter.data.CountLoader;
 import com.gtecklabs.simplecounter.di.ActivityModule;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -10,7 +7,6 @@ import com.gtecklabs.simplecounter.foundation.BaseActivityPresenter;
 import com.gtecklabs.simplecounter.foundation.BaseSubscriber;
 import com.gtecklabs.simplecounter.model.Count;
 import com.gtecklabs.simplecounter.util.Toaster;
-import com.gtecklabs.simplecounter.view.CountItemView;
 import timber.log.Timber;
 
 import javax.inject.Inject;
@@ -30,11 +26,6 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
 
   protected void inject(DiComponent component) {
     component.newActivityComponent(new ActivityModule(getActivity())).inject(this);
-  }
-
-  @Override
-  public void onCreate(@Nullable Bundle bundle) {
-    super.onCreate(bundle);
   }
 
   @Override

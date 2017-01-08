@@ -2,7 +2,6 @@ package com.gtecklabs.simplecounter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 import com.gtecklabs.simplecounter.data.CountLoader;
 import com.gtecklabs.simplecounter.di.ActivityModule;
 import com.gtecklabs.simplecounter.di.DiComponent;
@@ -27,7 +26,9 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
 
   private long mCountId;
 
-  private @Nullable Count mCount;
+  private
+  @Nullable
+  Count mCount;
 
   public ViewCounterPresenter(ViewCounterActivity activity) {
     super(activity);
@@ -42,7 +43,7 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
     super.onCreate(bundle);
 
     mCountId = getActivity().getIntent().getLongExtra(EXTRA_COUNT_ID, -1);
-    Preconditions.checkArgument(mCountId >=0 , "No count id passed in intent");
+    Preconditions.checkArgument(mCountId >= 0, "No count id passed in intent");
   }
 
   @Override
@@ -68,6 +69,7 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
 
   @Override
   public void onPause() {
+    super.onPause();
     if (mCount != null) {
       final float userValue = getActivity().getUserValue();
       if (mCount.value() != userValue) {
@@ -106,8 +108,9 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
       return;
     }
 
+    mCount = mCount.toBuilder().value(getActivity().getUserValue() + 1).build();
     subscribe(
-        mCountLoader.saveCount(mCount.increment()),
+        mCountLoader.saveCount(mCount),
         new BaseSubscriber<Count>() {
           @Override
           public void onError(Throwable e) {
@@ -122,8 +125,9 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
       return;
     }
 
+    mCount = mCount.toBuilder().value(getActivity().getUserValue() - 1).build();
     subscribe(
-        mCountLoader.saveCount(mCount.decrement()),
+        mCountLoader.saveCount(mCount),
         new BaseSubscriber<Count>() {
           @Override
           public void onError(Throwable e) {
