@@ -1,0 +1,46 @@
+<resources>
+
+  <string name="new_counter_save_action">"Feito"</string>
+  <string name="new_counter_input_name_hint">"Insira o nome"</string>
+  <string name="new_counter_screen_title">"Criar novo"</string>
+  <string name="settings">"Configurações"</string>
+  <string name="new_counter_input_name_title">"nome do contador"</string>
+  <string name="new_counter_input_name_description">"Digite um título curto, descritivo para a nova contagem. \ Neg \"Miles correu\", \"Games ganhou\""</string>
+  <string name="new_counter_input_description_title">"Descrição"</string>
+  <string name="new_counter_input_description_hint">"(Opcional) notas"</string>
+  <string name="new_counter_input_description_description">"Qualquer informação adicional sobre o balcão. \ Neg \"O número de milhas executados em maio\""</string>
+  <string name="new_counter_input_color_title">"cor"</string>
+  <string name="new_counter_input_color_description">"Cor para associar com o contador."</string>
+  <string name="error_new_counter_missing_name">"Digite um nome para esta contagem"</string>
+  <string name="error_new_counter_saving">"Erro ao salvar nova contagem"</string>
+  <string name="new_count_success_messsage">"Gravado!"</string>
+  <string name="error_incrementing_count">"Erro de contagem de incrementação"</string>
+  <string name="error_decrementing_count">"Erro de contagem decrementing"</string>
+  <string name="error_loading_count">"contagem de abertura de erro"</string>
+  <string name="view_counter_delete_action">"Eliminar"</string>
+  <string name="view_counter_success_message">"excluídos"</string>
+  <string name="error_view_counter_delete">"contador Erro ao eliminar"</string>
+  <string name="new_counter_confirm_exit_title">"Você tem certeza?"</string>
+  <string name="new_counter_confirm_exit_message">"Quaisquer alterações feitas serão perdidas"</string>
+  <string name="new_counter_confirm_exit_confirmation">"Sim, saída"</string>
+  <string name="new_counter_confirm_exit_cancel">"Cancelar"</string>
+  <string name="error_loading_counts">"o carregamento de dados de erro"</string>
+  <string name="count_list_nux_empty_text">"Adicionar uma nova contagem para começar!"</string>
+
+  <string name="app_settings_title">"Configurações"</string>
+  <string name="settings_cat_title_about">"Sobre esta aplicação"</string>
+
+  <string name="settings_key_app_version">"settings_key_app_version"</string>
+  <string name="settings_key_rate">"settings_key_rate"</string>
+  <string name="settings_key_support">"settings_key_support"</string>
+  <string name="settings_key_licenses">"settings_key_licenses"</string>
+
+  <string name="settings_title_app_version">"Versão app"</string>
+  <string name="settings_title_rate">"Avaliar aplicativo"</string>
+  <string name="settings_title_support">"Apoio"</string>
+  <string name="settings_title_licenses">"Licenças"</string>
+
+  <string name="settings_summary_rate">"Se você gosta do app, por favor deixe uma classificação no Google Play"</string>
+  <string name="settings_summary_support">"apoio e-mail com comentários ou solicitações"</string>
+  <string name="settings_summary_licenses">"Bibliotecas usadas para criar esta app"</string>
+</resources>
