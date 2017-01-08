@@ -1,0 +1,46 @@
+<resources>
+
+  <string name="new_counter_save_action">"Terminé"</string>
+  <string name="new_counter_input_name_hint">"Saisir un nom"</string>
+  <string name="new_counter_screen_title">"Créer un nouveau"</string>
+  <string name="settings">"Paramètres"</string>
+  <string name="new_counter_input_name_title">"Nom du compteur"</string>
+  <string name="new_counter_input_name_description">"Entrez un court titre descriptif pour votre nouveau compte. \ NEg \"Miles a couru\", \"Jeux gagné\""</string>
+  <string name="new_counter_input_description_title">"La description"</string>
+  <string name="new_counter_input_description_hint">"(Facultatif) notes"</string>
+  <string name="new_counter_input_description_description">"Toute information supplémentaire à propos de ce compteur. \ NEg \"Le nombre de miles gérés mai\""</string>
+  <string name="new_counter_input_color_title">"En couleur"</string>
+  <string name="new_counter_input_color_description">"Couleur à associer au compteur."</string>
+  <string name="error_new_counter_missing_name">"Entrez un nom pour ce compte"</string>
+  <string name="error_new_counter_saving">"sauver nouveau décompte erreur"</string>
+  <string name="new_count_success_messsage">"Sauvegardé !"</string>
+  <string name="error_incrementing_count">"Erreur comptage incrémenter"</string>
+  <string name="error_decrementing_count">"Erreur comptage décrémentation"</string>
+  <string name="error_loading_count">"Erreur comptage d'ouverture"</string>
+  <string name="view_counter_delete_action">"Effacer"</string>
+  <string name="view_counter_success_message">"supprimé"</string>
+  <string name="error_view_counter_delete">"suppression d'erreur compteur"</string>
+  <string name="new_counter_confirm_exit_title">"Êtes-vous sûr?"</string>
+  <string name="new_counter_confirm_exit_message">"Les modifications que vous avez apportées seront perdues"</string>
+  <string name="new_counter_confirm_exit_confirmation">"Oui, sortie"</string>
+  <string name="new_counter_confirm_exit_cancel">"Annuler"</string>
+  <string name="error_loading_counts">"Erreur de chargement des données"</string>
+  <string name="count_list_nux_empty_text">"Ajouter un nouveau compte pour commencer!"</string>
+
+  <string name="app_settings_title">"Paramètres"</string>
+  <string name="settings_cat_title_about">"À propos App"</string>
+
+  <string name="settings_key_app_version">"settings_key_app_version"</string>
+  <string name="settings_key_rate">"settings_key_rate"</string>
+  <string name="settings_key_support">"settings_key_support"</string>
+  <string name="settings_key_licenses">"settings_key_licenses"</string>
+
+  <string name="settings_title_app_version">"App version"</string>
+  <string name="settings_title_rate">"Évaluez l'application"</string>
+  <string name="settings_title_support">"Soutien"</string>
+  <string name="settings_title_licenses">"Licences"</string>
+
+  <string name="settings_summary_rate">"Si vous aimez l'application, laissez s'il vous plaît une note dans Google Play"</string>
+  <string name="settings_summary_support">"Support par courriel avec vos commentaires ou demandes"</string>
+  <string name="settings_summary_licenses">"Les bibliothèques utilisés pour créer cette application"</string>
+</resources>
