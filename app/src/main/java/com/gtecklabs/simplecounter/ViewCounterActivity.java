@@ -1,5 +1,6 @@
 package com.gtecklabs.simplecounter;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -123,6 +124,8 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
     mToolbarBackgroundContent.setBackgroundColor(color);
     mCollapsingToolbar.setContentScrimColor(color);
     getWindow().setStatusBarColor(ColorUtils.darkenColor(color));
+
+    setTaskDescription(new ActivityManager.TaskDescription(null, null, color));
   }
 
   private void setupToolbar() {
