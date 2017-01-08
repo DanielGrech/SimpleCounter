@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 
@@ -58,6 +59,7 @@ subprojects {
                 dagger        : "2.8",
                 jsr250        : "1.0",
                 licensedialog : "1.8.1",
+                playServices  : "10.0.1",
                 rebound       : "0.3.8",
                 rxAndroid     : "1.2.1",
                 rxLifecycle   : "0.8.0",

@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "996134421559",
+    "project_id": "simplecounter-debug"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996134421559:android:9c4f9cd01686345f",
+        "android_client_info": {
+          "package_name": "com.gtecklabs.simplecounter.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVxulOcyw9Gaog75wEwkmMNcdR4bSBS0s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-36903330-8"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
