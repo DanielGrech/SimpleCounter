@@ -65,6 +65,8 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
             getActivity().bind(count);
           }
         });
+
+    getActivity().showAd();
   }
 
   @Override

@@ -117,8 +117,8 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
   }
 
   @Override
-  public void onResume() {
-    super.onResume();
+  public void onStart() {
+    super.onStart();
     getActivity().showAd();
   }
 

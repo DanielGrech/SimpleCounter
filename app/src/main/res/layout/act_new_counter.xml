@@ -131,8 +131,7 @@
       android:id="@+id/ad_banner"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:layout_alignParentBottom="true"
+      android:layout_gravity="center_horizontal"
       android:visibility="gone"
       app:adSize="BANNER"
       app:adUnitId="@string/ad_id_banner_new" />

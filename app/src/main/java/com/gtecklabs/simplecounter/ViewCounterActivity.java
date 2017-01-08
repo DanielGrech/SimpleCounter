@@ -16,11 +16,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import com.google.android.gms.ads.AdView;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
 import com.gtecklabs.simplecounter.model.Count;
 import com.gtecklabs.simplecounter.ui.CountValueFormatter;
+import com.gtecklabs.simplecounter.util.AdManager;
 import com.gtecklabs.simplecounter.util.ColorUtils;
+
+import javax.inject.Inject;
 
 public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewCounterPresenter> {
 
@@ -38,6 +42,12 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
 
   @BindView(R.id.value)
   EditText mValueText;
+
+  @BindView(R.id.ad_banner)
+  AdView mAdView;
+
+  @Inject
+  AdManager mAdManager;
 
   public static Intent createIntent(Context context, long id) {
     return new Intent(context, ViewCounterActivity.class).putExtra(ViewCounterPresenter.EXTRA_COUNT_ID, id);
@@ -103,6 +113,10 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
     }
 
     setToolbarColor(count.color());
+  }
+
+  void showAd() {
+    mAdManager.maybeShowAd(mAdView);
   }
 
   private void setToolbarColor(@ColorInt int color) {
