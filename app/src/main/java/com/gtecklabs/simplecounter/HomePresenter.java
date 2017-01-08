@@ -65,6 +65,8 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
   }
 
   void onIncrementCountClicked(Count count) {
+    getAnalytics().logEvent("increment");
+
     subscribe(
         mCountLoader.saveCount(count.increment()),
         new BaseSubscriber<Count>() {
@@ -82,6 +84,8 @@ public class HomePresenter extends BaseActivityPresenter<HomeActivity> {
   }
 
   void onDecrementCountClicked(Count count) {
+    getAnalytics().logEvent("decrement");
+
     subscribe(
         mCountLoader.saveCount(count.decrement()),
         new BaseSubscriber<Count>() {

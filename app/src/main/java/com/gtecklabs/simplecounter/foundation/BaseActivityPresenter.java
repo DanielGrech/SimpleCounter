@@ -3,8 +3,13 @@ package com.gtecklabs.simplecounter.foundation;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.gtecklabs.simplecounter.BuildConfig;
 import com.gtecklabs.simplecounter.Navigator;
 import com.gtecklabs.simplecounter.ScApp;
+import com.gtecklabs.simplecounter.analytics.AppAnalytics;
+import com.gtecklabs.simplecounter.analytics.FirebaseAppAnalytics;
+import com.gtecklabs.simplecounter.analytics.LogcatAppAnalytics;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.util.Preconditions;
 import com.gtecklabs.simplecounter.util.RxUtils;
@@ -23,6 +28,7 @@ public abstract class BaseActivityPresenter<T extends Activity> {
 
   private T mActivity;
   private Navigator mNavigator;
+  private AppAnalytics mAnalytics;
   private final BehaviorSubject<ActivityEvent> mLifecycleObservable;
 
   private final List<Subscription> mSubscriptions = new LinkedList<>();
@@ -34,6 +40,7 @@ public abstract class BaseActivityPresenter<T extends Activity> {
     mLifecycleObservable = BehaviorSubject.create();
 
     mNavigator = new Navigator(mActivity);
+    mAnalytics = BuildConfig.DEBUG ? new LogcatAppAnalytics() : new FirebaseAppAnalytics(activity);
   }
 
   public void onCreate(@Nullable Bundle bundle) {
@@ -89,6 +96,10 @@ public abstract class BaseActivityPresenter<T extends Activity> {
 
   protected Navigator getNavigator() {
     return mNavigator;
+  }
+
+  protected AppAnalytics getAnalytics() {
+    return mAnalytics;
   }
 
   protected <S> Subscription subscribe(Observable<S> observable, BaseSubscriber<S> subscriber) {

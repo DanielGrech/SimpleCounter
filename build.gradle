@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.google.firebase:firebase-plugins:1.0.4'
     }
 }
 
@@ -57,9 +58,9 @@ subprojects {
                 autoValue     : "1.3",
                 butterknife   : "8.4.0",
                 dagger        : "2.8",
+                firebase      : "10.0.1",
                 jsr250        : "1.0",
                 licensedialog : "1.8.1",
-                playServices  : "10.0.1",
                 rebound       : "0.3.8",
                 rxAndroid     : "1.2.1",
                 rxLifecycle   : "0.8.0",

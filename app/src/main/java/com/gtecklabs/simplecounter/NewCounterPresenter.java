@@ -117,6 +117,8 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
   }
 
   void onDoneClicked() {
+    getAnalytics().logEvent("done");
+
     if (!validateUserInput()) {
       return;
     }
@@ -129,8 +131,9 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     saveAndClose(newCountToSave);
   }
 
-
   private void showConfirmExitDialog() {
+    getAnalytics().logEvent("confirm_exit");
+
     new AlertDialog.Builder(getActivity())
         .setTitle(R.string.new_counter_confirm_exit_title)
         .setMessage(R.string.new_counter_confirm_exit_message)

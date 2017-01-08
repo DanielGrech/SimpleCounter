@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.firebase.firebase-crash'
 
 buildscript {
     repositories {
@@ -103,7 +104,8 @@ dependencies {
     compile "de.psdev.licensesdialog:licensesdialog:${versions.licensedialog}"
     compile "javax.annotation:jsr250-api:${versions.jsr250}"
 
-    compile "com.google.android.gms:play-services-analytics:${versions.playServices}"
+    compile "com.google.firebase:firebase-core:${versions.firebase}"
+    compile "com.google.firebase:firebase-crash:${versions.firebase}"
 
     compile "com.trello:rxlifecycle:${versions.rxLifecycle}"
     compile "com.trello:rxlifecycle-android:${versions.rxLifecycle}"

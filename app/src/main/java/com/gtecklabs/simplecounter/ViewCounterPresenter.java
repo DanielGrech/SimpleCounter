@@ -85,6 +85,8 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
   }
 
   void onDeleteClicked() {
+    getAnalytics().logEvent("delete");
+
     subscribe(
         mCountLoader.deleteCount(mCountId),
         new BaseSubscriber<Void>() {
@@ -108,6 +110,8 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
       return;
     }
 
+    getAnalytics().logEvent("increment");
+
     mCount = mCount.toBuilder().value(getActivity().getUserValue() + 1).build();
     subscribe(
         mCountLoader.saveCount(mCount),
@@ -124,6 +128,8 @@ public class ViewCounterPresenter extends BaseActivityPresenter<ViewCounterActiv
     if (mCount == null) {
       return;
     }
+
+    getAnalytics().logEvent("decrement");
 
     mCount = mCount.toBuilder().value(getActivity().getUserValue() - 1).build();
     subscribe(
