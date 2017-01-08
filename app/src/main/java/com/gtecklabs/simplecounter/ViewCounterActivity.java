@@ -106,9 +106,13 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
 
   float getUserValue() {
     final Editable text = mValueText.getText();
-    return text == null || text.length() == 0 ?
-        0f :
-        Float.parseFloat(String.valueOf(text));
+    try {
+      return text == null || text.length() == 0 ?
+          0f :
+          Float.parseFloat(String.valueOf(text));
+    } catch (NumberFormatException ex) {
+      return 0f;
+    }
   }
 
   void bind(Count count) {
