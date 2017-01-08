@@ -20,6 +20,7 @@ import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
 import com.gtecklabs.simplecounter.model.Count;
 import com.gtecklabs.simplecounter.ui.CountValueFormatter;
+import com.gtecklabs.simplecounter.util.ColorUtils;
 
 public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewCounterPresenter> {
 
@@ -107,7 +108,7 @@ public class ViewCounterActivity extends BaseActivity<ViewCounterActivity, ViewC
   private void setToolbarColor(@ColorInt int color) {
     mToolbarBackgroundContent.setBackgroundColor(color);
     mCollapsingToolbar.setContentScrimColor(color);
-    getWindow().setStatusBarColor(color);
+    getWindow().setStatusBarColor(ColorUtils.darkenColor(color));
   }
 
   private void setupToolbar() {
