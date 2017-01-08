@@ -37,15 +37,27 @@ public class CountListItemRoundedBackgroundView extends FrameLayout {
     super.onSizeChanged(w, h, oldw, oldh);
     final int radius = w / 5;
 
-    mPath.reset();
-    mPath.moveTo(0, 0);
-    mPath.lineTo(0, h);
-    mPath.lineTo(w - radius, h);
-    mPath.cubicTo(
-        w - radius, h,
-        w, h / 2,
-        w - radius, 0);
-    mPath.lineTo(0, 0);
+    if (getLayoutDirection() == LAYOUT_DIRECTION_RTL) {
+      mPath.reset();
+      mPath.moveTo(w, 0);
+      mPath.lineTo(w, h);
+      mPath.lineTo(radius, h);
+      mPath.cubicTo(
+          radius, h,
+          0, h / 2,
+          radius, 0);
+      mPath.lineTo(w, 0);
+    } else {
+      mPath.reset();
+      mPath.moveTo(0, 0);
+      mPath.lineTo(0, h);
+      mPath.lineTo(w - radius, h);
+      mPath.cubicTo(
+          w - radius, h,
+          w, h / 2,
+          w - radius, 0);
+      mPath.lineTo(0, 0);
+    }
   }
 
   @Override
