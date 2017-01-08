@@ -10,9 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import butterknife.BindView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.gtecklabs.simplecounter.di.DiComponent;
 import com.gtecklabs.simplecounter.foundation.BaseActivity;
+import com.gtecklabs.simplecounter.util.AdManager;
 import com.gtecklabs.simplecounter.view.ColorPickerView;
+
+import javax.inject.Inject;
 
 public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCounterPresenter> {
 
@@ -27,6 +32,12 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
 
   @BindView(R.id.color_picker)
   ColorPickerView mColorPicker;
+
+  @BindView(R.id.ad_banner)
+  AdView mAdView;
+
+  @Inject
+  AdManager mAdManager;
 
   public static Intent createIntentForNewCount(Context context) {
     return new Intent(context, NewCounterActivity.class);
@@ -110,5 +121,9 @@ public class NewCounterActivity extends BaseActivity<NewCounterActivity, NewCoun
 
   void setUserInputColor(@ColorInt int color) {
     mColorPicker.setSelectedColor(color);
+  }
+
+  void showAd() {
+    mAdManager.maybeShowAd(mAdView);
   }
 }

@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "1009545897092",
-    "project_id": "simplecounter-5858c"
+    "firebase_url": "https://simplecounter-5858c.firebaseio.com",
+    "project_id": "simplecounter-5858c",
+    "storage_bucket": "simplecounter-5858c.appspot.com"
   },
   "client": [
     {
@@ -11,7 +13,16 @@
           "package_name": "com.gtecklabs.simplecounter"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1009545897092-0teu5arabe07k8bakv26hluu2mfnpb4f.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1009545897092-d88hiucjiciqf0lcn4sljmouu0ceuv13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCVwcZ-TLx8onqPKYJiJ8q9aTd-gHBtVbs"
@@ -29,7 +40,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

@@ -36,7 +36,7 @@ public class AndroidModule {
 
   @Provides
   @Singleton
-  SharedPreferences providesSharedPreferences(Context context) {
+  SharedPreferences providesSharedPreferences(@ForApplicationContext Context context) {
     return PreferenceManager.getDefaultSharedPreferences(context);
   }
 

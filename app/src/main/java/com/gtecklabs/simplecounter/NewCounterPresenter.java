@@ -116,6 +116,12 @@ public class NewCounterPresenter extends BaseActivityPresenter<NewCounterActivit
     super.onRestoreInstanceState(state);
   }
 
+  @Override
+  public void onResume() {
+    super.onResume();
+    getActivity().showAd();
+  }
+
   void onDoneClicked() {
     getAnalytics().logEvent("done");
 

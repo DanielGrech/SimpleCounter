@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.StrictMode;
 import android.support.annotation.VisibleForTesting;
 import butterknife.ButterKnife;
+import com.google.android.gms.ads.MobileAds;
 import com.gtecklabs.simplecounter.di.AndroidModule;
 import com.gtecklabs.simplecounter.di.DaggerDiComponent;
 import com.gtecklabs.simplecounter.di.DataModule;
@@ -24,10 +25,14 @@ public class ScApp extends Application {
       enableDebugTools();
     }
 
-     mDiComponent = DaggerDiComponent.builder()
+    MobileAds.initialize(this, BuildConfig.MOBILE_ADS_APP_ID);
+
+    mDiComponent = DaggerDiComponent.builder()
          .androidModule(new AndroidModule(this))
          .dataModule(new DataModule())
          .build();
+
+    mDiComponent.appPrefs().recordAppOpen();
   }
 
   @VisibleForTesting

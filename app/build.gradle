@@ -30,6 +30,7 @@ android {
         versionName config.versionName
 
         buildConfigField "String", "SUPPORT_EMAIL", "\"dgsoftwaredevelopment@gmail.com\""
+        buildConfigField "String", "MOBILE_ADS_APP_ID", "\"ca-app-pub-7157106990325877~1162979340\""
     }
 
     buildTypes {
@@ -104,6 +105,7 @@ dependencies {
     compile "de.psdev.licensesdialog:licensesdialog:${versions.licensedialog}"
     compile "javax.annotation:jsr250-api:${versions.jsr250}"
 
+    compile "com.google.firebase:firebase-ads:${versions.firebase}"
     compile "com.google.firebase:firebase-core:${versions.firebase}"
     compile "com.google.firebase:firebase-crash:${versions.firebase}"
 
